@@ -1,14 +1,4 @@
 const tokens = {
-  // Tokens para tabla y elementos generales
-  table: 'min-w-[1200px] w-full text-left table-auto text-sm sm:text-base',
-  tableHeader: 'bg-gray-200 dark:bg-darkbox text-center font-bold uppercase',
-  tableBorder: 'p-2 border',
-  button:
-    'group flex items-center gap-2 px-4 py-2 border border-transparent bg-white text-red text-xl font-semibold rounded-md transition duration-300 hover:bg-red hover:text-white hover:border-white',
-  stats:
-    'w-full rounded-lg border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark',
-  statsTitle: 'text-lg font-semibold text-black dark:text-white',
-  statsDescription: 'flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-boxdark',
 
   // Tokens para layout login (estructura)
   loginContainer: 'max-w-screen-sm mx-auto w-1/2',
@@ -26,6 +16,17 @@ const tokens = {
   errorText: 'font-bold',
   formButton:
     'w-full bg-white text-boxdark font-bold py-2 px-4 rounded-md border border-transparent hover:bg-boxdark hover:text-white hover:border-white focus:outline-none focus:ring-2 focus:ring-red',
+
+  // Tokens extraídos de tu código Home.jsx
+  container: 'relative w-full h-screen',
+  backgroundImage: 'object-cover z-0',
+  contentWrapper: 'absolute inset-0 z-10 flex flex-col justify-between',
+  header: 'w-full p-4 flex justify-between items-center',
+  loginButton:
+  'group flex items-center gap-2 px-4 py-2 border border-transparent bg-white text-boxdark text-xl font-semibold rounded-md transition duration-300 hover:bg-boxdark hover:text-white hover:border-white',
+
+  bottomTextWrapper: 'p-8 text-white bg-black/50 w-full',
+  bottomText: 'text-xl font-semibold',
 };
 
 export default tokens;
