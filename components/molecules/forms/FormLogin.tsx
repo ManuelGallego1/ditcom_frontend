@@ -7,9 +7,9 @@ import { LoginDTO, LoginDAO } from '@/interfaces/LoginInterface';
 import { loginUser } from '@/libs/auth-services';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-import formTokens from '@/utils/Token'; // 👈 Aquí se importan los tokens
+import tokens from '@/utils/Token';
 
-export default function Form() {
+export default function FormLogin() {
   const {
     register,
     handleSubmit,
@@ -54,34 +54,34 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={formTokens.formGroup}>
-        <label htmlFor="username" className={formTokens.label}>
+      <div className={tokens.formGroup}>
+        <label htmlFor="username" className={tokens.label}>
           Usuario
         </label>
         <input
           id="username"
           type="text"
           {...register('username')}
-          className={formTokens.input}
+          className={tokens.input}
         />
-        {errors.username && <p className={formTokens.errorText}>{errors.username.message}</p>}
+        {errors.username && <p className={tokens.errorText}>{errors.username.message}</p>}
       </div>
 
-      <div className="mb-6">
-        <label htmlFor="password" className={formTokens.label}>
+      <div className={tokens.formGroupPassword}>
+        <label htmlFor="password" className={tokens.label}>
           Contraseña
         </label>
         <input
           id="password"
           type="password"
           {...register('password')}
-          className={formTokens.input}
+          className={tokens.input}
         />
-        {errors.password && <p className={formTokens.errorText}>{errors.password.message}</p>}
+        {errors.password && <p className={tokens.errorText}>{errors.password.message}</p>}
       </div>
 
       <div>
-        <button type="submit" className={formTokens.button}>
+        <button type="submit" className={tokens.formButton}>
           Iniciar Sesión
         </button>
       </div>
