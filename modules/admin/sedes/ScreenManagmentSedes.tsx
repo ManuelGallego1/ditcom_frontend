@@ -1,6 +1,7 @@
 import React from 'react'
 import TableSedes from '@/components/organism/tables/TableSedes'
 import tokens from '@/utils/Token'
+import FormSedes from '@/components/molecules/forms/FormSedes'
 
 export default function ScreenManagmentUsers() {
     return (
@@ -9,7 +10,7 @@ export default function ScreenManagmentUsers() {
             <p className={tokens.pageSubtitle}>Manager de sedes</p>
             <div className={tokens.gridWrapper}>
                 <div className={tokens.gridLeft}>
-                    {/* Aquí podrías agregar futuros filtros, etc. */}
+                    <FormSedes />
                 </div>
                 <div className={tokens.gridRight}>
                     <TableSedes />

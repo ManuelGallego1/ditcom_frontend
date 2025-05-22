@@ -17,5 +17,4 @@ export interface SedeServiceList extends DefaultInterfaceResponse<SedeDAO[]> {}
 export interface SedeDTO {
     nombre: string;
     coordinador_id: number;
-    activo: number;
 }

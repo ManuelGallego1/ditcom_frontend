@@ -1,5 +1,6 @@
 import React from 'react'
 import TableUsers from '@/components/organism/tables/TableUsers'
+import FormUsers from '@/components/molecules/forms/FormUsers'
 import tokens from '@/utils/Token'
 
 export default function ScreenManagmentUsers() {
@@ -9,7 +10,7 @@ export default function ScreenManagmentUsers() {
       <p className={tokens.pageSubtitle}>Manager de usuarios</p>
       <div className={tokens.gridWrapper}>
         <div className={tokens.gridLeft}>
-          {/* Aquí podrías agregar futuros filtros, etc. */}
+          <FormUsers />
         </div>
         <div className={tokens.gridRight}>
           <TableUsers />

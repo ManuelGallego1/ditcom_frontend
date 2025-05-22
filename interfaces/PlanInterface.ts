@@ -15,5 +15,4 @@ export interface PlanServiceList extends DefaultInterfaceResponse<PlanDAO[]> {}
 export interface PlanDTO {
     codigo: string;
     nombre: string;
-    activo: number;
 }

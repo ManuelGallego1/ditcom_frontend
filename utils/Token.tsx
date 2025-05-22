@@ -23,7 +23,7 @@ const tokens = {
   tableContainer: 'p-4 bg-white dark:bg-boxdark rounded-xl shadow-md overflow-hidden',
   headerWrapper: 'flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2',
   headerTitle: 'text-lg font-semibold text-black dark:text-white',
-  tableWrapper: 'overflow-x-auto max-h-[40vh] overflow-y-auto block',
+  tableWrapper: 'overflow-x-auto max-h-[50vh] overflow-y-auto block',
   table: 'min-w-full table-auto text-sm text-left border-collapse border rounded-md',
   tableHeadRow: 'bg-gray-100 bg-white text-black uppercase text-xs',
   tableHeadCell: 'p-3 whitespace-nowrap',

@@ -46,7 +46,7 @@ export const getPlanById = async (id: string): Promise<PlanServiceDetail> => {
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/plans/${id}`, headersOptions);
+        const response = await fetch(`${API_URL}/api/planes/${id}`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -74,7 +74,7 @@ export const createPlan = async (plan: PlanDTO): Promise<PlanServiceDetail> => {
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/plans`, headersOptions);
+        const response = await fetch(`${API_URL}/api/planes`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -102,7 +102,7 @@ export const updatePlan = async (id: string, plan: PlanDTO): Promise<PlanService
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/plans/${id}`, headersOptions);
+        const response = await fetch(`${API_URL}/api/planes/${id}`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -129,7 +129,7 @@ export const deletePlan = async (id: string): Promise<void> => {
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/plans/${id}`, headersOptions);
+        const response = await fetch(`${API_URL}/api/planes/${id}`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

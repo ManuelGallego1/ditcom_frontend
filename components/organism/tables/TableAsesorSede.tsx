@@ -9,7 +9,6 @@ import Pagination from '@/components/atoms/Pagination';
 import SearchInput from '@/components/atoms/SearchInput';
 import { CustomIcons } from '@/utils/Icons';
 import tokens from '@/utils/Token';
-import Link from 'next/link';
 
 type AlertType = 'success' | 'error' | 'info' | 'warning';
 
@@ -117,9 +116,6 @@ export default function TableSedeAsesores() {
                     <td className={tokens.tableCell}>{item.vendedor.username}</td>
                     <td className={tokens.tableCellCenter}>
                       <div className={tokens.actionWrapper}>
-                        <Link href={`/admin/sede-asesores/${item.id}`}>
-                          <span className={tokens.viewAction}><CustomIcons.info /> Ver</span>
-                        </Link>
                         <button onClick={() => handleDelete(item.id)} className={tokens.deleteAction}>
                           <CustomIcons.delete /> Eliminar
                         </button>
