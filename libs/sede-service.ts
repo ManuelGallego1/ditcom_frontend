@@ -3,7 +3,8 @@ import Cookies from 'js-cookie';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const getSedes = async (): Promise<SedeServiceList> => {
+export const getSedes = async (url?: string): Promise<SedeServiceList> => {
+    const apiUrl = url || `${API_URL}/api/sedes`;
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');
@@ -18,7 +19,7 @@ export const getSedes = async (): Promise<SedeServiceList> => {
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/sedes`, headersOptions);
+        const response = await fetch(apiUrl, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

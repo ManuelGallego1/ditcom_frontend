@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import tokens from '@/utils/Token';
 
 interface SearchInputProps {
   onSearch: (value: string) => void;
@@ -22,7 +23,7 @@ export default function SearchInput({ onSearch, placeholder = 'Buscar...' }: Sea
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
       placeholder={placeholder}
-      className="border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 w-full sm:w-64"
+      className={tokens.input}
     />
   );
 }

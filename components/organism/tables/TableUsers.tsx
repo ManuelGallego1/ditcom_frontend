@@ -8,11 +8,14 @@ import { CustomIcons } from '@/utils/Icons';
 import Loading from '@/components/atoms/Loading';
 import AlertBox from '@/components/atoms/AlertBox';
 import Pagination from '@/components/atoms/Pagination';
+import SearchInput from '@/components/atoms/SearchInput';
+import tokens from '@/utils/Token';
 
 type AlertType = 'success' | 'error' | 'info' | 'warning';
 
 export default function TableUsers() {
     const [isLoading, setIsLoading] = useState(true);
+    const [allUsers, setAllUsers] = useState<UserDAO[]>([]);
     const [usersList, setUsersList] = useState<UserDAO[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [alert, setAlert] = useState<{ type: AlertType; message: string } | null>(null);
@@ -31,6 +34,7 @@ export default function TableUsers() {
         try {
             const response: UserServiceList = await getUsers(url);
             if (Array.isArray(response.data)) {
+                setAllUsers(response.data);
                 setUsersList(response.data);
                 setPagination({
                     currentPage: response.current_page ?? 1,
@@ -59,6 +63,7 @@ export default function TableUsers() {
 
         try {
             await deleteUser(userId);
+            setAllUsers((prev) => prev.filter((user) => user.id !== userId));
             setUsersList((prevUsers) => prevUsers.filter((user) => user.id !== userId));
             setAlert({ type: 'success', message: 'Usuario eliminado correctamente.' });
         } catch (error) {
@@ -77,48 +82,60 @@ export default function TableUsers() {
         fetchUsers(url);
     };
 
+    const handleSearch = (value: string) => {
+        const search = value.toLowerCase();
+        const filtered = allUsers.filter((user) =>
+            user.username.toLowerCase().includes(search) ||
+            user.role.toLowerCase().includes(search)
+        );
+        setUsersList(filtered);
+    };
+
     return (
         <>
-            <div className="p-4 bg-white dark:bg-boxdark rounded-xl shadow-md overflow-hidden">
-                <h2 className="text-lg font-semibold text-black dark:text-white mb-4">Lista de Usuarios</h2>
+            <div className={tokens.tableContainer}>
+                <div className={tokens.headerWrapper}>
+                    <h2 className={tokens.headerTitle}>Lista de Usuarios</h2>
+                    <SearchInput onSearch={handleSearch} placeholder="Buscar usuario o rol..." />
+                </div>
 
-                <div className="overflow-x-auto max-h-[60vh] overflow-y-auto block">
-                    <table className="min-w-full table-auto text-sm text-left border-collapse border rounded-md">
+                <div className={tokens.tableWrapper}>
+                    <table className={tokens.table}>
                         <thead>
-                            <tr className="bg-gray-100 bg-white text-black uppercase text-xs">
-                                <th className="p-3 whitespace-nowrap">Usuario</th>
-                                <th className="p-3 whitespace-nowrap">Rol</th>
-                                <th className="p-3 whitespace-nowrap text-center">Acciones</th>
+                            <tr className={tokens.tableHeadRow}>
+                                <th className={tokens.tableHeadCell}>Usuario</th>
+                                <th className={tokens.tableHeadCell}>Rol</th>
+                                <th className={tokens.tableHeadActionCell}>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {isLoading ? (
                                 <tr>
-                                    <td colSpan={3} className="text-center p-4">
+                                    <td colSpan={3} className={tokens.loadingCell}>
                                         <Loading />
                                     </td>
                                 </tr>
                             ) : error ? (
                                 <tr>
-                                    <td colSpan={3} className="text-center text-red-500 p-4">
+                                    <td colSpan={3} className={tokens.errorCell}>
                                         {error}
                                     </td>
                                 </tr>
                             ) : usersList.length > 0 ? (
                                 usersList.map((user) => (
-                                    <tr key={user.id} className="border-t border-gray-200 bg-white text-black">
-                                        <td className="p-3">{user.username}</td>
-                                        <td className="p-3 capitalize">{user.role}</td>
-                                        <td className="p-3 text-center">
-                                            <div className="flex flex-wrap justify-center gap-3">
+                                    <tr key={user.id} className={tokens.tableRow}>
+                                        <td className={tokens.tableCell}>{user.username}</td>
+                                        <td className={tokens.tableCellCapitalized}>{user.role}</td>
+                                        <td className={tokens.tableCellCenter}>
+                                            <div className={tokens.actionWrapper}>
                                                 <Link href={`/admin/usuarios/${user.id}`}>
-                                                    <span className="text-green-500 hover:underline flex items-center gap-1 cursor-pointer">
+                                                    <span className={tokens.viewAction}>
                                                         <CustomIcons.info className="text-base" /> Ver
                                                     </span>
                                                 </Link>
                                                 <button
                                                     onClick={() => handleDelete(user.id)}
-                                                    className="text-red-500 hover:underline flex items-center gap-1"
+                                                    className={tokens.deleteAction}
                                                 >
                                                     <CustomIcons.delete className="text-base" /> Eliminar
                                                 </button>
@@ -128,7 +145,7 @@ export default function TableUsers() {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={3} className="text-center p-4">
+                                    <td colSpan={3} className={tokens.noUsersCell}>
                                         No hay usuarios disponibles.
                                     </td>
                                 </tr>
@@ -137,8 +154,7 @@ export default function TableUsers() {
                     </table>
                 </div>
 
-                {/* Paginación */}
-                {!isLoading && !error && usersList.length > 0 && (
+                {!isLoading && !error && usersList.length > 0 && usersList.length === allUsers.length && (
                     <Pagination
                         currentPage={pagination.currentPage}
                         lastPage={pagination.lastPage}
