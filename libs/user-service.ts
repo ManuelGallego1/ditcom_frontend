@@ -1,4 +1,4 @@
-import { UserDTO, UserServiceDetail, UserServiceList } from "@/interfaces/UserInterface";
+import { UserDTO, UserServiceDetail, UserServiceList, UserUpdateDTO } from "@/interfaces/UserInterface";
 import Cookies from 'js-cookie';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -86,7 +86,7 @@ export const createUser = async (user: UserDTO): Promise<UserServiceDetail> => {
     }
 }
 
-export const updateUser = async (id: string, user: UserDTO): Promise<UserServiceDetail> => {
+export const updateUser = async (id: string, user: UserUpdateDTO): Promise<UserServiceDetail> => {
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');

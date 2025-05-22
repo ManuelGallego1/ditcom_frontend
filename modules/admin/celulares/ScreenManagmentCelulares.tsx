@@ -1,6 +1,7 @@
 import React from 'react'
 import TableCelulares from '@/components/organism/tables/TableCelulares'
 import tokens from '@/utils/Token'
+import FormCelular from '@/components/molecules/forms/FormCelulares'
 
 export default function ScreenManagmentUsers() {
     return (
@@ -9,7 +10,7 @@ export default function ScreenManagmentUsers() {
             <p className={tokens.pageSubtitle}>Manager de celulares</p>
             <div className={tokens.gridWrapper}>
                 <div className={tokens.gridLeft}>
-                    {/* Aquí podrías agregar futuros filtros, etc. */}
+                    <FormCelular />
                 </div>
                 <div className={tokens.gridRight}>
                     <TableCelulares />
