@@ -1,7 +1,7 @@
 const tokens = {
 
   // Tokens para layout login (estructura)
-  loginContainer: 'max-w-screen-sm mx-auto w-1/2',
+  loginContainer: 'max-w-screen-sm mx-auto sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6',
   loginWrapper: 'container mx-auto flex justify-center items-center h-screen',
   loginBox: 'w-full max-w-[28rem]',
   loginCard: 'bg-boxdark shadow-lg rounded-lg px-8 py-10',

@@ -22,6 +22,10 @@ import {
   MdError,
   MdClose,
   MdMenu,
+  MdPhone,
+  MdPhoneAndroid,
+  MdSignalCellularAlt,
+  MdLocationOn  
 } from "react-icons/md";
 
 export const CustomIcons = {
@@ -48,4 +52,8 @@ export const CustomIcons = {
   error: MdError,
   close: MdClose,
   menu: MdMenu,
+  phone: MdPhone,
+  mobileScreen: MdPhoneAndroid,
+  signal: MdSignalCellularAlt,
+  locationDot: MdLocationOn,
 };

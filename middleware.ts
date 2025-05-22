@@ -2,16 +2,14 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { parse } from 'cookie';
 
-// Rutas permitidas según rol
 const rolePermissions = {
-  admin: [/^\/(.*)?$/],                // Admin puede acceder a todo
+  admin: [/^\/(.*)?$/],
   user: [/^\/dashboard(\/.*)?$/],
   asesor: [/^\/asesor(\/.*)?$/],
   pyme: [/^\/pyme(\/.*)?$/],
   super: [/^\/admin(\/.*)?$/],
 };
 
-// Rutas por defecto según el rol
 const defaultPaths = {
   admin: '/admin',
   user: '/dashboard',
@@ -34,12 +32,15 @@ export function middleware(req: NextRequest) {
 
   const { pathname } = req.nextUrl;
 
-  // ✅ Permitir ver el HomePage al entrar a "/"
   if (pathname === '/') {
+    if (userRole && userRole in defaultPaths) {
+      const url = req.nextUrl.clone();
+      url.pathname = defaultPaths[userRole as Role];
+      return NextResponse.redirect(url);
+    }
     return NextResponse.next();
   }
 
-  // ✅ Si entra a /login y ya tiene sesión → redirigir a su dashboard
   if (pathname === '/login') {
     if (userRole && userRole in defaultPaths) {
       const url = req.nextUrl.clone();
@@ -61,14 +62,12 @@ export function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
-  // Si no está logueado → redirigir a login
   if (!userRole || !(userRole in rolePermissions)) {
     const url = req.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 
-  // Revisar si tiene permiso para acceder a la ruta
   const allowedPaths = rolePermissions[userRole as Role];
   const hasAccess = allowedPaths.some((pathRegex) => pathRegex.test(pathname));
 
@@ -78,6 +77,5 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // ✅ Permitir el acceso
   return NextResponse.next();
 }
