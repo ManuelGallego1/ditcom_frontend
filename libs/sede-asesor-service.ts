@@ -1,10 +1,10 @@
-import { PlanDTO, PlanServiceDetail, PlanServiceList } from "@/interfaces/PlanInterface";
+import { SedeAsesorDTO, SedeAsesorServiceDetail, SedeAsesorServiceList } from "@/interfaces/SedeAsesorInterface";
 import Cookies from 'js-cookie';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const getPlans = async (url?: string): Promise<PlanServiceList> => {
-    const apiUrl = url || `${API_URL}/api/planes`;
+export const getSedeAsesores = async (url: string): Promise<SedeAsesorServiceList> => {
+    const apiUrl = url || `${API_URL}/api/sedes-vendedores`;
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');
@@ -23,7 +23,7 @@ export const getPlans = async (url?: string): Promise<PlanServiceList> => {
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
-        const data: PlanServiceList = await response.json();
+        const data: SedeAsesorServiceList = await response.json();
         return data;
     } catch (error) {
         console.error('Fetch error:', error);
@@ -31,7 +31,7 @@ export const getPlans = async (url?: string): Promise<PlanServiceList> => {
     }
 }
 
-export const getPlanById = async (id: string): Promise<PlanServiceDetail> => {
+export const getSedeAsesorById = async (id: string): Promise<SedeAsesorServiceDetail> => {
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');
@@ -46,11 +46,11 @@ export const getPlanById = async (id: string): Promise<PlanServiceDetail> => {
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/plans/${id}`, headersOptions);
+        const response = await fetch(`${API_URL}/api/sedes-vendedores/${id}`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
-        const data: PlanServiceDetail = await response.json();
+        const data: SedeAsesorServiceDetail = await response.json();
         return data;
     } catch (error) {
         console.error('Fetch error:', error);
@@ -58,7 +58,7 @@ export const getPlanById = async (id: string): Promise<PlanServiceDetail> => {
     }
 }
 
-export const createPlan = async (plan: PlanDTO): Promise<PlanServiceDetail> => {
+export const createSedeAsesor = async (sedeAsesor: SedeAsesorDTO): Promise<SedeAsesorServiceDetail> => {
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');
@@ -70,15 +70,15 @@ export const createPlan = async (plan: PlanDTO): Promise<PlanServiceDetail> => {
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(plan)
+        body: JSON.stringify(sedeAsesor)
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/plans`, headersOptions);
+        const response = await fetch(`${API_URL}/api/sedes-vendedores`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
-        const data: PlanServiceDetail = await response.json();
+        const data: SedeAsesorServiceDetail = await response.json();
         return data;
     } catch (error) {
         console.error('Fetch error:', error);
@@ -86,7 +86,7 @@ export const createPlan = async (plan: PlanDTO): Promise<PlanServiceDetail> => {
     }
 }
 
-export const updatePlan = async (id: string, plan: PlanDTO): Promise<PlanServiceDetail> => {
+export const updateSedeAsesor = async (id: string, sedeAsesor: SedeAsesorDTO): Promise<SedeAsesorServiceDetail> => {
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');
@@ -98,15 +98,15 @@ export const updatePlan = async (id: string, plan: PlanDTO): Promise<PlanService
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(plan)
+        body: JSON.stringify(sedeAsesor)
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/plans/${id}`, headersOptions);
+        const response = await fetch(`${API_URL}/api/sedes-vendedores/${id}`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
-        const data: PlanServiceDetail = await response.json();
+        const data: SedeAsesorServiceDetail = await response.json();
         return data;
     } catch (error) {
         console.error('Fetch error:', error);
@@ -114,7 +114,7 @@ export const updatePlan = async (id: string, plan: PlanDTO): Promise<PlanService
     }
 }
 
-export const deletePlan = async (id: string): Promise<void> => {
+export const deleteSedeAsesor = async (id: string): Promise<void> => {
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');
@@ -129,7 +129,7 @@ export const deletePlan = async (id: string): Promise<void> => {
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/plans/${id}`, headersOptions);
+        const response = await fetch(`${API_URL}/api/sedes-vendedores/${id}`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

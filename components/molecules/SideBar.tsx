@@ -52,7 +52,7 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
         },
         {
             label: "Celulares",
-            href: "/",
+            href: "/admin/celulares",
             roles: ["admin", "administrador", "vendedor", "activador", "pyme"],
             icon: CustomIcons.signal,
         },
@@ -76,7 +76,7 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
         },
         {
             label: "asignar sede",
-            href: "/admin/asignar-sede",
+            href: "/admin/vincular-sede",
             roles: ["admin", "administrador"],
             icon: CustomIcons.locationSelect,
         }

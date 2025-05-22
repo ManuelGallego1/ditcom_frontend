@@ -38,6 +38,12 @@ const tokens = {
   viewAction: 'text-green-500 hover:underline flex items-center gap-1 cursor-pointer',
   deleteAction: 'text-red-500 hover:underline flex items-center gap-1',
   noUsersCell: 'text-center p-4',
+  pageWrapper: 'flex flex-col gap-6 p-6',
+  pageTitle: 'text-2xl font-bold text-red',
+  pageSubtitle: 'text-base text-red',
+  gridWrapper: 'grid grid-cols-3 md:grid-cols-3 gap-6',
+  gridLeft: 'col-span-1 flex flex-col gap-2',
+  gridRight: 'col-span-2 flex flex-col gap-2',
 };
 
 export default tokens;

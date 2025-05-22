@@ -104,6 +104,7 @@ export default function TableUsers() {
                         <thead>
                             <tr className={tokens.tableHeadRow}>
                                 <th className={tokens.tableHeadCell}>Usuario</th>
+                                <th className={tokens.tableHeadCell}>Nombre</th>
                                 <th className={tokens.tableHeadCell}>Rol</th>
                                 <th className={tokens.tableHeadActionCell}>Acciones</th>
                             </tr>
@@ -125,6 +126,7 @@ export default function TableUsers() {
                                 usersList.map((user) => (
                                     <tr key={user.id} className={tokens.tableRow}>
                                         <td className={tokens.tableCell}>{user.username}</td>
+                                        <td className={tokens.tableCell}>{user.name}</td>
                                         <td className={tokens.tableCellCapitalized}>{user.role}</td>
                                         <td className={tokens.tableCellCenter}>
                                             <div className={tokens.actionWrapper}>

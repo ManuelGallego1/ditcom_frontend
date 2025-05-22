@@ -1,8 +1,8 @@
-export default function ScreenActivador() {
-  return (
-    <div>
-      <h1>Página Activador</h1>
-      <p>Bienvenido al panel de activador.</p>
-    </div>
-  );
+import TableFijo from '@/components/organism/tables/TableFijo';
+import React from 'react';
+
+export default function Page() {
+    return (
+        <TableFijo />
+    );
 }
