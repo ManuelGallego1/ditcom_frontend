@@ -1,4 +1,4 @@
-import { DefaultInterfaceResponse, PaginatedData } from "./DefaultInterface";
+import { DefaultInterfaceResponse } from "./DefaultInterface";
 
 export interface MovilDAO {
     id: number;
@@ -24,7 +24,7 @@ export interface MovilDAO {
 }
 
 export interface MovilServiceDetail extends DefaultInterfaceResponse<MovilDAO> {}
-export interface MovilServiceList extends DefaultInterfaceResponse<PaginatedData<MovilDAO>> {}
+export interface MovilServiceList extends DefaultInterfaceResponse<MovilDAO[]> {}
 
 export interface MovilDTO {
     min: string;

@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import Screen from "@/modules/screen/ScreenPyme"
+import Screen from "@/modules/clients/ScreenPyme"
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 

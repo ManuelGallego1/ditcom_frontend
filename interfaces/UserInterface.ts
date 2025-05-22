@@ -1,4 +1,4 @@
-import { DefaultInterfaceResponse } from "./DefaultInterface";
+import { DefaultInterfaceResponse} from "./DefaultInterface";
 
 export interface UserDAO {
     id: number;

@@ -42,19 +42,19 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
             label: "Fijo",
             href: "/admin/fijo",
             roles: ["admin", "administrador"],
-            icon: CustomIcons.phone ?? CustomIcons.home,
+            icon: CustomIcons.home,
         },
         {
             label: "Móvil",
             href: "/admin/movil",
             roles: ["admin", "administrador"],
-            icon: CustomIcons.home,
+            icon: CustomIcons.phone,
         },
         {
             label: "Celulares",
             href: "/",
             roles: ["admin", "administrador", "vendedor", "activador", "pyme"],
-            icon: CustomIcons.signal ?? CustomIcons.home,
+            icon: CustomIcons.signal,
         },
         {
             label: "Usuarios",
@@ -66,7 +66,7 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
             label: "Sedes",
             href: "/admin/sedes",
             roles: ["admin", "administrador"],
-            icon: CustomIcons.locationDot ?? CustomIcons.home,
+            icon: CustomIcons.locationDot,
         },
         {
             label: "Planes",
@@ -93,13 +93,13 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
             label: "Ver móvil",
             href: "/asesor/ver-movil",
             roles: ["vendedor", "activador"],
-            icon: CustomIcons.home,
+            icon: CustomIcons.phone,
         },
         {
             label: "Ver Fijo",
             href: "/asesor/ver-fijo",
             roles: ["vendedor", "activador"],
-            icon: CustomIcons.phone ?? CustomIcons.home,
+            icon: CustomIcons.home,
         },
     ];
 

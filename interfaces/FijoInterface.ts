@@ -1,4 +1,4 @@
-import { DefaultInterfaceResponse, PaginatedData } from "./DefaultInterface";
+import { DefaultInterfaceResponse} from "./DefaultInterface";
 
 export interface FijoDAO {
     id: number;
@@ -22,7 +22,7 @@ export interface FijoDAO {
 }
 
 export interface FijoServiceDetail extends DefaultInterfaceResponse<FijoDAO> {}
-export interface FijoServiceList extends DefaultInterfaceResponse<PaginatedData<FijoDAO>> {}
+export interface FijoServiceList extends DefaultInterfaceResponse<FijoDAO[]> {}
 
 export interface FijoDTO {
     fecha_instalacion: string;

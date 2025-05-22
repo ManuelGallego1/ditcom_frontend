@@ -3,7 +3,8 @@ import Cookies from 'js-cookie';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const getUsers = async (): Promise<UserServiceList> => {
+export const getUsers = async (url?: string): Promise<UserServiceList> => {
+    const apiUrl = url || `${API_URL}/api/users`;
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');
@@ -18,7 +19,7 @@ export const getUsers = async (): Promise<UserServiceList> => {
     };
 
     try {
-        const response = await fetch(`${API_URL}/api/users`, headersOptions);
+        const response = await fetch(apiUrl, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -113,7 +114,7 @@ export const updateUser = async (id: string, user: UserDTO): Promise<UserService
     }
 }
 
-export const deleteUser = async (id: string): Promise<void> => {
+export const deleteUser = async (id: number): Promise<void> => {
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');

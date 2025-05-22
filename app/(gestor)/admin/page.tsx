@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import Screen from "@/modules/screen/ScreenAdmin"
+import Screen from "@/modules/clients/ScreenAdmin"
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
