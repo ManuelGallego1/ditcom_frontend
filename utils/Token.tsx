@@ -12,18 +12,18 @@ const tokens = {
   formGroupPassword: 'mb-6',
   label: 'block text-white pb-5 text-center',
   input:
-    'w-full px-3 py-2 text-black border rounded-md focus:outline-none focus:ring focus:ring-indigo-300',
-  errorText: 'font-bold',
-  formButton:
-    'w-full bg-white text-boxdark font-bold py-2 px-4 rounded-md border border-transparent hover:bg-boxdark hover:text-white hover:border-white focus:outline-none focus:ring-2 focus:ring-red',
+    'w-full px-3 py-2 text-black border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-white/50 active:ring-2 active:ring-white/50',
+  errorText: 'font-bold text-white text-sm',
+  primaryButton:
+    'w-full bg-white text-boxdark font-bold py-2 px-4 rounded-md border border-transparent hover:bg-boxdark hover:text-white hover:border-white focus:outline-none focus:ring-2 focus:ring-red transition-all duration-300 ease-in-out',
 
   // Tokens extraídos de tu código Home.jsx
   container: 'relative w-full h-screen',
   backgroundImage: 'object-cover z-0',
   contentWrapper: 'absolute inset-0 z-10 flex flex-col justify-between',
   header: 'w-full p-4 flex justify-between items-center',
-  loginButton:
-  'group flex items-center gap-2 px-4 py-2 border border-transparent bg-white text-boxdark text-xl font-semibold rounded-md transition duration-300 hover:bg-boxdark hover:text-white hover:border-white',
+  secondaryButton:
+  'group flex items-center gap-2 px-4 py-2 border border-transparent bg-white text-boxdark font-semibold rounded-md transition-colors duration-300 ease-in-out hover:bg-boxdark hover:text-white hover:border-white',
 
   bottomTextWrapper: 'p-8 text-white bg-black/50 w-full',
   bottomText: 'text-xl font-semibold',
