@@ -1,4 +1,4 @@
-import { UserLoginDAO } from './UserInterface';
+import { UserDAO } from './UserInterface';
 
 export interface LoginDTO {
     password: string;
@@ -8,7 +8,7 @@ export interface LoginDTO {
 export interface LoginDAO {
     data: {
         token: string;
-        user: UserLoginDAO;
+        user: UserDAO;
     }
     status: string;
     message: string;

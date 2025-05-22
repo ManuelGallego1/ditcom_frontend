@@ -1,3 +1,5 @@
+import { DefaultInterfaceResponse } from "./DefaultInterface";
+
 export interface UserDAO {
     id: number;
     name: string;
@@ -8,27 +10,7 @@ export interface UserDAO {
     updated_at: string;
 }
 
-export interface UsersDAO
-{
-    users: UserDAO[];
-    message: string;
-    status: number;
-}
-
-export interface UserLoginDAO {
-    id: number;
-    name: string;
-    username: string;
-    role: UserRole;
-    activo: number;
-    created_at: string;
-    updated_at: string;
-}
-
-export interface UserServiceDetail {
-    data: UserDAO[];
-    status: number;
-}
+export interface UserServiceDetail extends DefaultInterfaceResponse<UserDAO> {}
 
 export interface UserDTO {
     name: string;
