@@ -22,7 +22,7 @@ export interface FijoDAO {
 }
 
 export interface FijoServiceDetail extends DefaultInterfaceResponse<FijoDAO> {}
-export interface FijoServiceList extends DefaultInterfaceResponse<PaginatedData<FijoDAO[]>> {}
+export interface FijoServiceList extends DefaultInterfaceResponse<PaginatedData<FijoDAO>> {}
 
 export interface FijoDTO {
     fecha_instalacion: string;
