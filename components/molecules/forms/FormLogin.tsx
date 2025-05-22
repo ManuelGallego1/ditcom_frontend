@@ -49,6 +49,12 @@ export default function FormLogin() {
               case 'pyme':
                 router.push('/pyme');
                 break;
+              case 'activador':
+                router.push('/activador');
+                break;
+              case 'coordinador':
+                router.push('/coordinador');
+                break;
               default:
                 console.log('Role not found');
             }

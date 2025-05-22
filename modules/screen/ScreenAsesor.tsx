@@ -1,12 +1,8 @@
-import React from "react";
-
-const ScreenPyme = () => {
+export default function ScreenActivador() {
   return (
     <div>
-      <h1>Página asesor</h1>
-      <p>Asesor</p>
+      <h1>Página Asesor</h1>
+      <p>Bienvenido al panel de activador.</p>
     </div>
   );
-};
-
-export default ScreenPyme;
+}

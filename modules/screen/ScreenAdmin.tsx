@@ -1,12 +1,8 @@
-import React from "react";
-
-const ScreenAdmin = () => {
+export default function ScreenActivador() {
   return (
     <div>
       <h1>Página Admin</h1>
-      <p>Bienvenido al panel de administrador.</p>
+      <p>Bienvenido al panel de activador.</p>
     </div>
   );
-};
-
-export default ScreenAdmin;
+}

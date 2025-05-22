@@ -20,4 +20,4 @@ export interface UserDTO {
     role: UserRole;
 }
 
-export type UserRole = 'admin' | 'administrador' | 'pyme' | 'coordinador' | 'vendedor'| 'ro';
+export type UserRole = 'admin' | 'administrador' | 'pyme' | 'coordinador' | 'vendedor' | 'activador';
