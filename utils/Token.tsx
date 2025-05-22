@@ -44,6 +44,12 @@ const tokens = {
   gridWrapper: 'grid grid-cols-3 md:grid-cols-3 gap-6',
   gridLeft: 'col-span-1 flex flex-col gap-2',
   gridRight: 'col-span-2 flex flex-col gap-2',
+  inputDark: 'w-full px-5 py-3 text-white border border-white rounded-xl bg-transparent font-medium outline-none transition focus:border-primary active:border-primary dark:bg-darkbox',
+  formCardWrapper: 'rounded-lg border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1',
+  formScrollableBody: 'h-[60vh] overflow-y-auto justify-between',
+  formLabel: 'block mb-3 text-black dark:text-white font-medium',
+  formTitle: 'mb-6 text-xl font-semibold text-black dark:text-white',
+  dangerButton: 'w-full bg-white text-red font-medium py-3 px-5 rounded-xl border border-transparent transition duration-300 hover:bg-red hover:text-white hover:border-white',
 };
 
 export default tokens;
