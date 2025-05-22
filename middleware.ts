@@ -49,10 +49,17 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Ignorar archivos estáticos de Next.js
-  if (pathname.startsWith('/_next/static')) {
-    return NextResponse.next();
-  }
+    if (req.nextUrl.pathname.startsWith('/_next/static')) {
+        return NextResponse.next();
+    }
+
+    if (req.nextUrl.pathname.startsWith('/img')) {
+        return NextResponse.next();
+    }
+
+    if (req.nextUrl.pathname.startsWith('/_next/image')) {
+        return NextResponse.next();
+    }
 
   // Si no está logueado → redirigir a login
   if (!userRole || !(userRole in rolePermissions)) {
