@@ -1,0 +1,30 @@
+import { z } from "zod";
+
+export const MovilSchema = z.object({
+  min: z.string().length(10, "MIN debe tener exactamente 10 caracteres"),
+  imei: z.string().length(15, "IMEI debe tener exactamente 15 caracteres"),
+  iccid: z.string().length(17, "ICCID debe tener exactamente 17 caracteres"),
+  tipo: z.enum([
+    "kit prepago",
+    "kit financiado",
+    "wb",
+    "up grade",
+    "linea nueva",
+    "reposicion",
+    "portabilidad pre",
+    "portabilidad pos",
+    "venta de tecnologia",
+    "equipo pos",
+  ]),
+  plan_id: z.number().int().positive("El ID del plan debe ser un número positivo"),
+  celulares_id: z.number().int().positive("El ID del celular debe ser un número positivo"),
+  cliente_cc: z.string().nonempty("El campo Cliente CC es obligatorio"),
+  tipo_producto: z.enum(["residencial", "pyme"]),
+  factura: z.string(),
+  ingreso_caja: z.string(),
+  valor_recarga: z.number().nullable().optional(),
+  valor_total: z.number().positive("El valor total debe ser un número positivo"),
+  vendedor_id: z.number().int().positive("El ID del vendedor debe ser un número positivo"),
+  financiera: z.enum(["crediminuto", "celya", "brilla", "N/A"]),
+  estado: z.enum(["digitado", "reclamar", "instalado", "cancelado", "razonado"]),
+});
