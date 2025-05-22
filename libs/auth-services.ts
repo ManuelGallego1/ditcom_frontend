@@ -25,7 +25,7 @@ export const loginUser = async (body: LoginDTO) => {
         console.error('Fetch error:', error);
         throw error;
     }
-};
+}
 
 export const registerUser = async (user: UserDTO) => {
     try {
@@ -54,7 +54,7 @@ export const registerUser = async (user: UserDTO) => {
         console.error('Error creating user:', error);
         throw error;
     }
-};
+}
 
 export const logoutUser = async (): Promise<boolean> => {
     const token = Cookies.get('token');
@@ -87,4 +87,4 @@ export const logoutUser = async (): Promise<boolean> => {
         console.error('Fetch error:', error);
         return false;
     }
-};
+}

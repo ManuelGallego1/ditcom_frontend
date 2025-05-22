@@ -13,6 +13,7 @@ export interface ClienteDAO{
 }
 
 export interface ClienteServiceDetail extends DefaultInterfaceResponse<ClienteDAO> {}
+export interface ClienteServiceList extends DefaultInterfaceResponse<ClienteDAO[]> {}
 
 export interface ClienteDTO {
     cc: string;

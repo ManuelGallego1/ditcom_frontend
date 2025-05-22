@@ -9,7 +9,8 @@ export interface SedeDAO {
     updated_at: string;
 }
 
-export interface SedeServiceDetail extends DefaultInterfaceResponse<SedeDAO> {}
+export interface SedeServiceDetail extends DefaultInterfaceResponse<SedeDAO[]> {}
+export interface SedeServiceList extends DefaultInterfaceResponse<SedeDAO[]> {}
 
 export interface SedeDTO {
     nombre: string;

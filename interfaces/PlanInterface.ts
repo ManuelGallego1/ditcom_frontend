@@ -10,6 +10,7 @@ export interface PlanDAO {
 }
 
 export interface PlanServiceDetail extends DefaultInterfaceResponse<PlanDAO> {}
+export interface PlanServiceList extends DefaultInterfaceResponse<PlanDAO[]> {}
 
 export interface PlanDTO {
     codigo: string;

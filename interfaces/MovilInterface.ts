@@ -24,7 +24,7 @@ export interface MovilDAO {
 }
 
 export interface MovilServiceDetail extends DefaultInterfaceResponse<MovilDAO> {}
-export interface MovilServiceList extends DefaultInterfaceResponse<PaginatedData<MovilDAO>> {}
+export interface MovilServiceList extends DefaultInterfaceResponse<PaginatedData<MovilDAO[]>> {}
 
 export interface MovilDTO {
     min: string;

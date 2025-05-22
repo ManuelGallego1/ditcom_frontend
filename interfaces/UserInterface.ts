@@ -11,6 +11,7 @@ export interface UserDAO {
 }
 
 export interface UserServiceDetail extends DefaultInterfaceResponse<UserDAO> {}
+export interface UserServiceList extends DefaultInterfaceResponse<UserDAO[]> {}
 
 export interface UserDTO {
     name: string;
