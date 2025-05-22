@@ -25,7 +25,9 @@ import {
   MdPhone,
   MdPhoneAndroid,
   MdSignalCellularAlt,
-  MdLocationOn  
+  MdLocationOn,
+  MdMap,
+  MdWork
 } from "react-icons/md";
 
 export const CustomIcons = {
@@ -56,4 +58,6 @@ export const CustomIcons = {
   mobileScreen: MdPhoneAndroid,
   signal: MdSignalCellularAlt,
   locationDot: MdLocationOn,
+  plans: MdWork,
+  locationSelect: MdMap
 };

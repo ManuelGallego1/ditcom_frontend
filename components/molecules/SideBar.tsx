@@ -68,6 +68,18 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
             roles: ["admin", "administrador"],
             icon: CustomIcons.locationDot ?? CustomIcons.home,
         },
+        {
+            label: "Planes",
+            href: "/admin/planes",
+            roles: ["admin", "administrador"],
+            icon: CustomIcons.plans,
+        },
+        {
+            label: "asignar sede",
+            href: "/admin/asignar-sede",
+            roles: ["admin", "administrador"],
+            icon: CustomIcons.locationSelect,
+        }
     ];
 
     const asesorItems = [
