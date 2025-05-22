@@ -1,25 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-// TODO: Update the path below to the actual location of your tokens file
 import tokens from "@/utils/Token";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="relative w-full h-screen">
     
       <Image
-        src="/img/png/Home.jpg"
+        src="/img/png/home.jpg"
         alt="Imagen principal"
         fill
         className="object-cover z-0"
         priority
       />
 
-    
       <div className="absolute inset-0 z-10 flex flex-col justify-between">
         
         <div className="w-full p-4 flex justify-between items-center">
-          <Image src="/img/png/logo.png" alt="Logo" width={100} height={100} />
+          <Image src="/img/png/logo.png" alt="Logo" width={200} height={200} />
           <Link href="/login">
             <button className={tokens.loginButton}>
               Iniciar Sesión
