@@ -1,11 +1,10 @@
-/* Importa la fuente Satoshi para que coincida con Tailwind */
-@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Variables CSS para colores, si las quieres usar */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -13,19 +12,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1a1a1a;  /* fondo oscuro más adecuado */
+    --background: #ffffff;
     --foreground: #ededed;
   }
 }
 
-/* Solo establece la fuente en el body, no color ni fondo */
 body {
-  font-family: 'Satoshi', sans-serif;
-  /* NO pongas color ni background aquí para no pisar estilos Tailwind */
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Montserrat", sans-serif;
+
+  select option {
+    color: #8B0000;
+    background-color: #ffffff;
+  }
+  
 }
 
-/* Opcional: estilos para select options */
-select option {
-  color: #8B0000;
-  background-color: #ffffff;
-}
+

@@ -17,7 +17,7 @@ export const loginUser = async (body: LoginDTO) => {
     try {
         const response = await fetch(`${API_URL}/api/login`, headersOptions);
         if (!response.ok) {
-            throw new Error(`Error: ${response.status} ${response.statusText}`);
+            throw new Error(`Error: ${response.status } ${response.statusText}`);
         }
         const data = await response.json();
         return data;
