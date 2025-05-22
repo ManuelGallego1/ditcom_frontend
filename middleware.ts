@@ -44,6 +44,14 @@ export function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
+    if (req.nextUrl.pathname.startsWith('/img')) {
+        return NextResponse.next();
+    }
+
+    if (req.nextUrl.pathname.startsWith('/_next/image')) {
+        return NextResponse.next();
+    }
+
     if (!userRole || !(userRole in rolePermissions)) {
         const url = req.nextUrl.clone();
         url.pathname = '/login';

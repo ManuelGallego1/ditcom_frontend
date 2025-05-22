@@ -13,16 +13,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".", // ✅ Asegura que las rutas comiencen desde la raíz
-    "paths": {
-      "@/*": ["./*"] // ✅ Apunta directamente a la raíz (donde está Modules, styles, etc.)
-    },
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "middleware.js"],
   "exclude": ["node_modules"]
 }
