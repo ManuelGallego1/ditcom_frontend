@@ -14,5 +14,5 @@ export const registerScheme = z.object({
         .min(4, { message: "Se requiere mínimo 4 caracteres" })
         .regex(/^[a-zA-Z ]+$/, { message: "Solo se permiten letras y espacios" }),
 
-    role: z.enum(["admin", "administrador", "pyme", "coordinador", "vendedor", "ro"]),
+    role: z.enum(["admin", "administrador", "pyme", "coordinador", "vendedor", "rol","activador"]),
 });
