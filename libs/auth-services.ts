@@ -15,7 +15,7 @@ export const loginUser = async (body: LoginDTO) => {
     };
 
     try {
-        const response = await fetch('https://ditcombackend.amcdevcode.com/api/login', headersOptions);
+        const response = await fetch(`${API_URL}/api/login`, headersOptions);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -64,7 +64,7 @@ export const logoutUser = async (): Promise<boolean> => {
     }
 
     try {
-        const response = await fetch('https://ditcombackend.amcdevcode.com/api/logout', {
+        const response = await fetch(`${API_URL}/api/logout`, {
             method: 'POST',
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -82,7 +82,7 @@ export const logoutUser = async (): Promise<boolean> => {
         Cookies.remove('user');
         Cookies.remove('token');
 
-        return true; // logout exitoso
+        return true;
     } catch (error) {
         console.error('Fetch error:', error);
         return false;
