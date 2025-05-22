@@ -1,5 +1,6 @@
 import React from 'react'
 import TableUsers from '@/components/organism/tables/TableUsers'
+import FormUsers from '@/components/molecules/forms/FormUsers'
 
 export default function ScreenManagmentUsers() {
   return (
@@ -8,6 +9,7 @@ export default function ScreenManagmentUsers() {
       <p className='text-base text-red'>Manager de usuarios</p>
       <div className='grid grid-cols-3 md:grid-cols-3 gap-6'>
         <div className='col-span-1 flex flex-col gap-2'>
+          <FormUsers />
         </div>
         <div className='col-span-2 flex flex-col gap-2'>
           <TableUsers />
