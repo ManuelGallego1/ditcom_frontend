@@ -16,3 +16,10 @@ export interface CelularDTO {
     marca: string;
     modelo: string;
 }
+
+export interface CelularUpdateDTO {
+    id: number;
+    marca: string;
+    modelo: string;
+    activo: number;
+}
