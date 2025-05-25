@@ -31,11 +31,11 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
         <Icon className="text-bodydark1 group-hover:text-red transition-colors duration-300 w-5 h-5" />
     );
 
-    const menuItems = [
+    const adminsItems = [
         {
             label: "Dashboard",
             href: "/admin",
-            roles: ["admin", "administrador", "coordinador"],
+            roles: ["admin", "administrador"],
             icon: CustomIcons.dashboard,
         },
         {
@@ -82,29 +82,41 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
         }
     ];
 
-    const asesorItems = [
+    const usersItems = [
         {
             label: "Inicio",
-            href: "/asesor",
-            roles: ["vendedor", "activador", "pyme"],
+            href: role === "pyme" ? "/pyme" : "/asesor",
+            roles: ["vendedor", "activador", "pyme", "coordinador"],
             icon: CustomIcons.users,
         },
         {
             label: "Ver móvil",
-            href: "/asesor/ver-movil",
-            roles: ["vendedor", "activador"],
+            href: role === "pyme" ? "/pyme/ver-movil" : "/asesor/ver-movil",
+            roles: ["vendedor", "activador", "coordinador", "pyme"],
             icon: CustomIcons.phone,
         },
         {
             label: "Ver Fijo",
-            href: "/asesor/ver-fijo",
-            roles: ["vendedor", "activador"],
+            href: role === "pyme" ? "/pyme/ver-fijo" : "/asesor/ver-fijo",
+            roles: ["vendedor", "activador", "coordinador", "pyme"],
             icon: CustomIcons.home,
         },
+        {
+            label: "Crear movil",
+            href: "/asesor/crear-movil",
+            roles: ["vendedor"],
+            icon: CustomIcons.phone,
+        },
+        {
+            label: "Crear fijo",
+            href: "/asesor/crear-fijo",
+            roles: ["vendedor"],
+            icon: CustomIcons.home,
+        }
     ];
 
-    const filteredItems = menuItems.filter((item) => item.roles.includes(role));
-    const filteredAsesorItems = asesorItems.filter((item) => item.roles.includes(role));
+    const filteredItems = adminsItems.filter((item) => item.roles.includes(role));
+    const filteredAsesorItems = usersItems.filter((item) => item.roles.includes(role));
 
     return (
         <>

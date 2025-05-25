@@ -4,18 +4,20 @@ import { parse } from 'cookie';
 
 const rolePermissions = {
   admin: [/^\/(.*)?$/],
-  user: [/^\/dashboard(\/.*)?$/],
   vendedor: [/^\/asesor(\/.*)?$/],
+  coordinador: [/^\/coordinador(\/.*)?$/],
+  activador: [/^\/activador(\/.*)?$/],
   pyme: [/^\/pyme(\/.*)?$/],
-  super: [/^\/admin(\/.*)?$/],
+  administrador: [/^\/admin(\/.*)?$/],
 };
 
 const defaultPaths = {
   admin: '/admin',
-  user: '/dashboard',
+  coordinador: '/coordinador',
+  activador: '/activador',
   vendedor: '/asesor',
   pyme: '/pyme',
-  super: '/admin',
+  administrador: '/admin',
 };
 
 type Role = keyof typeof defaultPaths;
