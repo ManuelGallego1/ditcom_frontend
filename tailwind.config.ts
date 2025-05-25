@@ -9,7 +9,7 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      current: 'currentColor',
+      current: '#343a40',
       transparent: 'transparent',
       red: {
         DEFAULT: '#8B0000',
@@ -22,7 +22,7 @@ const config: Config = {
         dark: '#E5E7EB',
       },
       black: {
-        DEFAULT: '#1C2434',
+        DEFAULT: '#343a40',
         light: '#434A5A',
         dark: '#010101',
       },
@@ -98,7 +98,7 @@ const config: Config = {
         dark: '#E5E7EB',
       },
       boxdark: {
-        DEFAULT: '#8B0000',
+        DEFAULT: '#9c0720',
         light: '#B22222',
         dark: '#5A0612',
       },
@@ -187,7 +187,6 @@ const config: Config = {
         light: '#5AAEFF',
         dark: '#0846A6',
       },
-      // Colores añadidos para el botón de Home
       primaryRed: {
         DEFAULT: '#D42E4D',
         light: '#FF5A7A',
@@ -366,7 +365,7 @@ const config: Config = {
         0.5: '0.5px',
       },
       borderRadius: {
-        '4xl': '2rem',
+        '4xl': '1.5rem',
       },
     },
   },

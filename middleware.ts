@@ -5,7 +5,7 @@ import { parse } from 'cookie';
 const rolePermissions = {
   admin: [/^\/(.*)?$/],
   user: [/^\/dashboard(\/.*)?$/],
-  asesor: [/^\/asesor(\/.*)?$/],
+  vendedor: [/^\/asesor(\/.*)?$/],
   pyme: [/^\/pyme(\/.*)?$/],
   super: [/^\/admin(\/.*)?$/],
 };
@@ -13,7 +13,7 @@ const rolePermissions = {
 const defaultPaths = {
   admin: '/admin',
   user: '/dashboard',
-  asesor: '/asesor',
+  vendedor: '/asesor',
   pyme: '/pyme',
   super: '/admin',
 };

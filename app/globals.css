@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -20,7 +18,6 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Montserrat", sans-serif;
 
   select option {
     color: #8B0000;

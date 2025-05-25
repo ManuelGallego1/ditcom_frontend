@@ -53,7 +53,7 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
         {
             label: "Celulares",
             href: "/admin/celulares",
-            roles: ["admin", "administrador", "vendedor", "activador", "pyme"],
+            roles: ["admin", "administrador"],
             icon: CustomIcons.signal,
         },
         {
