@@ -4,7 +4,7 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FijoDTO } from '@/interfaces/FijoInterface';
-import { createFijo } from '@/libs/fijo-services';
+import { createFijo } from '@/libs/fijo-service';
 import { fijoSchema } from '@/schemes/FijoScheme';
 import { z } from 'zod';
 import tokens from '@/utils/Token';
