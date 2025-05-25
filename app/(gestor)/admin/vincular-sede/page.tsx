@@ -3,7 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Gestor - Vincular Sede',
+    title: 'Gestor - Vincular Sede | Ditcom',
     description: 'Gestor de Vincular Sede',
 };
 

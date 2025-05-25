@@ -3,7 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Gestor - Usuarios',
+    title: 'Gestor - Usuarios | Ditcom',
     description: 'Gestor de Usuarios',
 };
 
