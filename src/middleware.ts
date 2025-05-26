@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { parse } from 'cookie';
-import { i18n } from './i18n';
+import { routing } from './i18n/routing';
 
 const rolePermissions = {
   admin: [/^\/(.*)?$/],
@@ -26,28 +26,38 @@ type Role = keyof typeof defaultPaths;
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // 1) Detectamos el locale por URL o usamos el default
+  // 1. Detectar locale o usar el default
   const locale =
-    i18n.locales.find((loc) => pathname.startsWith(`/${loc}`)) ||
-    i18n.defaultLocale;
+    routing.locales.find((loc) => pathname.startsWith(`/${loc}`)) ||
+    routing.defaultLocale;
 
-  // 2) Si están en la raíz exacta "/", redirigimos a "/{locale}"
+  // 2. Redirigir desde "/" a "/{locale}"
   if (pathname === '/') {
     const url = req.nextUrl.clone();
     url.pathname = `/${locale}`;
     return NextResponse.redirect(url);
   }
 
-  // 3) Normalizamos removiendo el locale de la ruta
+  // 3. Redirigir si no hay locale en la URL
+  const hasLocale = routing.locales.some(
+    (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
+  );
+  if (!hasLocale) {
+    const url = req.nextUrl.clone();
+    url.pathname = `/${locale}${pathname}`;
+    return NextResponse.redirect(url);
+  }
+
+  // 4. Remover el locale para evaluar permisos
   const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
 
-  // 4) Rutas públicas accesibles sin login (pero ya no incluimos "/")
+  // 5. Permitir rutas públicas (como /login)
   const publicPaths = ['/login'];
   if (publicPaths.includes(pathWithoutLocale)) {
     return NextResponse.next();
   }
 
-  // 5) Permitimos assets estáticos
+  // 6. Permitir recursos estáticos
   if (
     pathname.startsWith('/_next/static') ||
     pathname.startsWith('/_next/image') ||
@@ -57,32 +67,41 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // 6) Leemos la cookie de usuario
+  // 7. Leer cookie de usuario
   const cookieHeader = req.headers.get('cookie') || '';
   const cookies = parse(cookieHeader);
-  const user = cookies.user ? JSON.parse(cookies.user) : null;
-  const userRole = user?.role ?? null;
+  let userRole: string | null = null;
 
-  // 7) Si no está autenticado, redirigimos a "/{locale}/login"
+  try {
+    const user = cookies.user ? JSON.parse(cookies.user) : null;
+    userRole = user?.role ?? null;
+  } catch {
+    userRole = null;
+  }
+
+  // 8. Redirigir al login si no está autenticado o rol inválido
   if (!userRole || !(userRole in rolePermissions)) {
     const url = req.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
   }
 
-  // 8) Validamos permisos de ruta según role
+  // 9. Validar permisos por ruta
   const allowedPaths = rolePermissions[userRole as Role];
-  const hasAccess = allowedPaths.some((regex) =>
-    regex.test(pathWithoutLocale)
-  );
+  const hasAccess = allowedPaths.some((regex) => regex.test(pathWithoutLocale));
 
-  // 9) Si no tiene acceso, lo mandamos a su dashboard por defecto
+  // 10. Redirigir al dashboard por defecto si no tiene permiso
   if (!hasAccess) {
     const url = req.nextUrl.clone();
     url.pathname = `/${locale}${defaultPaths[userRole as Role]}`;
     return NextResponse.redirect(url);
   }
 
-  // 10) Todo OK, continúa
+  // 11. Todo correcto, continuar
   return NextResponse.next();
 }
+
+// 12. Configurar matcher para ignorar rutas internas
+export const config = {
+  matcher: ['/((?!_next|favicon.ico|img).*)'],
+};
