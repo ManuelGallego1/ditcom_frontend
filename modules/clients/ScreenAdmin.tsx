@@ -1,8 +1,14 @@
-export default function ScreenActivador() {
+'use client';
+
+import { useTranslations } from 'next-intl';
+
+export default function ScreenAdmin() {
+  const t = useTranslations('Admin');
+
   return (
     <div>
-      <h1>Página Admin</h1>
-      <p>Bienvenido al panel de activador.</p>
+      <h1>{t('title')}</h1>
+      <p>{t('welcome')}</p>
     </div>
   );
 }

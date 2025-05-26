@@ -5,7 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { CustomIcons } from "@/utils/Icons";
 import Loading from "@/components/atoms/Loading";
-
+import { useTranslations } from "next-intl";
 interface SideBarProps {
     sidebarOpen: boolean;
     setSidebarOpen?: (open: boolean) => void;
@@ -13,6 +13,7 @@ interface SideBarProps {
 }
 
 export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarProps) {
+    const t = useTranslations("SideBar");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
@@ -33,49 +34,49 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
 
     const adminsItems = [
         {
-            label: "Dashboard",
+            label: t("Dashboard"),
             href: "/admin",
             roles: ["admin", "administrador"],
             icon: CustomIcons.dashboard,
         },
         {
-            label: "Fijo",
+            label: t("Fijo"),
             href: "/admin/fijo",
             roles: ["admin", "administrador"],
             icon: CustomIcons.home,
         },
         {
-            label: "Móvil",
+            label: t("Móvil"),
             href: "/admin/movil",
             roles: ["admin", "administrador"],
             icon: CustomIcons.phone,
         },
         {
-            label: "Celulares",
+            label: t("Celulares"),
             href: "/admin/celulares",
             roles: ["admin", "administrador"],
             icon: CustomIcons.signal,
         },
         {
-            label: "Usuarios",
+            label: t("Usuarios"),
             href: "/admin/usuarios",
             roles: ["admin"],
             icon: CustomIcons.users,
         },
         {
-            label: "Sedes",
+            label: t("Sedes"),
             href: "/admin/sedes",
             roles: ["admin", "administrador"],
             icon: CustomIcons.locationDot,
         },
         {
-            label: "Planes",
+            label: t("Planes"),
             href: "/admin/planes",
             roles: ["admin", "administrador"],
             icon: CustomIcons.plans,
         },
         {
-            label: "asignar sede",
+            label: t("asignar sede"),
             href: "/admin/vincular-sede",
             roles: ["admin", "administrador"],
             icon: CustomIcons.locationSelect,
@@ -84,31 +85,31 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
 
     const usersItems = [
         {
-            label: "Inicio",
+            label: t("Inicio"),
             href: role === "pyme" ? "/pyme" : "/asesor",
             roles: ["vendedor", "activador", "pyme", "coordinador"],
             icon: CustomIcons.users,
         },
         {
-            label: "Ver móvil",
+            label: t("Ver móvil"),
             href: role === "pyme" ? "/pyme/ver-movil" : "/asesor/ver-movil",
             roles: ["vendedor", "activador", "coordinador", "pyme"],
             icon: CustomIcons.phone,
         },
         {
-            label: "Ver Fijo",
+            label: t("Ver Fijo"),
             href: role === "pyme" ? "/pyme/ver-fijo" : "/asesor/ver-fijo",
             roles: ["vendedor", "activador", "coordinador", "pyme"],
             icon: CustomIcons.home,
         },
         {
-            label: "Crear movil",
+            label: t("Crear movil"),
             href: "/asesor/crear-movil",
             roles: ["vendedor"],
             icon: CustomIcons.phone,
         },
         {
-            label: "Crear fijo",
+            label: t("Crear fijo"),
             href: "/asesor/crear-fijo",
             roles: ["vendedor"],
             icon: CustomIcons.home,

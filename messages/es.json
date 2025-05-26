@@ -8,5 +8,39 @@
     "password": "Contraseña",
     "submitButton": "Iniciar Sesión",
     "Error message": "Alguno de los campos es incorrecto o el usuario no existe"
+  },
+  "Admin": {
+    "title": "Página Admin",
+    "welcome": "Bienvenido al panel de administrador."
+  },
+  "NavBar": {
+    "logout": "Salir"
+  },
+  
+    "roles": {
+      "admin": "Administrador",
+      "coordinator": "coordinador",
+      "seller": "vendedor",
+      "activator": "activador",
+      "SME": "pyme",
+      "super user": "super usuario" 
+},
+"Sidebar" : {
+    "dashboard": "Tablero",
+    "fixed": "Fijo",
+    "mobile": "Móvil",
+    "cellphones": "Celulares",
+    "users": "Usuarios",
+    "branches": "Sucursales",
+    "plans": "Planes",
+    "assignBranch": "Asignar sucursal",
+    "Home": "Inicio",
+    "view mobile": "Ver móvil",
+    "viewFixed": "Ver fijo",
+    "createMobile": "Crear móvil",
+    "createFixed": "Crear fijo"
   }
 }
+
+  
+

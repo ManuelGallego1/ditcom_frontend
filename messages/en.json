@@ -8,5 +8,38 @@
     "password": "Password",
     "submitButton": "Log In",
     "Error message": "One of the fields is incorrect or the user does not exist"
+  },
+  "Admin": {
+    "title": "Admin Page",
+    "welcome": "Welcome to the admin panel."
+  },
+  "NavBar": {
+    "logout": "Logout"
+  },
+  "roles": {
+   "admin": "Administrator",
+      "coordinator": "coordinator",
+      "seller": "seller",
+      "activator": "activator",
+      "SME": "SME",
+      "super user": "super user" 
+  },
+  "Sidebar": {
+    "dashboard": "Dashboard",
+    "fixed": "Fixed",
+    "mobile": "Mobile",
+    "cellphones": "Cellphones",
+    "users": "Users",
+    "branches": "Branches",
+    "plans": "Plans",
+    "assignBranch": "Assign branch",
+    "Home": "Home",
+    "view mobile": "View mobile",
+    "viewFixed": "View fixed",
+    "createMobile": "Create mobile",
+    "createFixed": "Create fixed"
   }
 }
+
+
+
