@@ -155,7 +155,7 @@ export const getMarcasCelulares = async (): Promise<DefaultInterfaceResponse> =>
     }
 }
 
-export const getModelosByMarca = async (marca: string): Promise<DefaultInterfaceResponse> => {
+export const getModelosByMarca = async (marca: string): Promise<CelularServiceList> => {
     const token = Cookies.get('token');
     if (!token) {
         throw new Error('No se encontró el token de autenticación.');

@@ -27,7 +27,8 @@ import {
   MdSignalCellularAlt,
   MdLocationOn,
   MdMap,
-  MdWork
+  MdWork,
+  MdPlusOne,
 } from "react-icons/md";
 
 export const CustomIcons = {
@@ -59,5 +60,6 @@ export const CustomIcons = {
   signal: MdSignalCellularAlt,
   locationDot: MdLocationOn,
   plans: MdWork,
-  locationSelect: MdMap
+  locationSelect: MdMap,
+  plus: MdPlusOne,
 };

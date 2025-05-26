@@ -44,9 +44,24 @@ const tokens = {
   gridWrapper: 'grid grid-cols-3 md:grid-cols-3 gap-6',
   gridLeft: 'col-span-1 flex flex-col gap-2',
   gridRight: 'col-span-2 flex flex-col gap-2',
-  inputDark: 'w-full px-5 py-3 text-white border border-white rounded-4xl bg-transparent font-medium outline-none transition focus:border-primary active:border-primary dark:bg-darkbox',
+  inputDark: `
+  w-full px-5 py-3 text-white placeholder:text-white/50
+  border border-white rounded-4xl bg-transparent font-medium
+  outline-none transition focus:border-primary active:border-primary
+  [&>option]:bg-white [&>option]:text-red
+`,
   formCardWrapper: 'rounded-4xl border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1',
-  formScrollableBody: 'h-[60vh] overflow-y-auto justify-between',
+  formScrollableBody: `
+  h-[60vh] overflow-y-auto px-4 py-4 rounded-4xl border border-strokedark
+  [&::-webkit-scrollbar]:w-2.5
+  [&::-webkit-scrollbar-track]:bg-boxdark-2 [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-bodydark [&::-webkit-scrollbar-thumb]:rounded-full
+  dark:[&::-webkit-scrollbar-track]:bg-boxdark
+  dark:[&::-webkit-scrollbar-thumb]:bg-bodydark1
+  mt-6
+`,
+
+
   formLabel: 'block mb-3 text-black dark:text-white font-medium',
   formTitle: 'mb-6 text-xl font-semibold text-black dark:text-white',
   dangerButton: 'w-full bg-white text-red font-medium py-3 px-5 rounded-4xl border border-transparent transition duration-300 hover:bg-red hover:text-white hover:border-white',

@@ -79,16 +79,14 @@ export interface MovilDTO {
     plan_id: number;
     celulares_id: number;
     cliente_cc: string;
+    tipo_producto: TipoProducto;
     factura: string;
     ingreso_caja: string;
+    valor_recarga?: number | null;
     valor_total: number;
-    valor_recarga: number;
-    tipo_producto: TipoProducto;
     vendedor_id: number;
-    sede_id: number;
     financiera: Financiera;
-    coordinador_id: number;
-    estado: Estado;
+    marca?: string;
 }
 
 export enum Estado {

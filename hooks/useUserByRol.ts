@@ -14,7 +14,7 @@ export function useUsersByRole(role: string) {
       setLoading(true);
       setError(null);
       try {
-        const query = `${API_URL}/api/users?role=${encodeURIComponent(role)}`;
+        const query = `${API_URL}/api/users?role=${encodeURIComponent(role)}&no_pagination=true`;
         const resp = await getUsers(query);
         setItems(resp.data ?? []);
       } catch (err: any) {

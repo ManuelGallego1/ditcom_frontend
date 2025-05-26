@@ -14,7 +14,7 @@ export function useSedes() {
       setLoading(true);
       setError(null);
       try {
-        const query = `${API_URL}/api/sedes`;
+        const query = `${API_URL}/api/sedes?no_pagination=true`;
         const resp = await getSedes(query);
         setItems(resp.data ?? []);
       } catch (err: any) {
