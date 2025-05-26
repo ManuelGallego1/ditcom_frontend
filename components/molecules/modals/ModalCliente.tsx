@@ -43,7 +43,10 @@ export default function ClienteModal({
             await createCliente(data);
             setAlert({ type: 'success', message: 'Cliente creado exitosamente.' });
             if (onClienteCreado) onClienteCreado();
-            setTimeout(() => onClose(), 1500);
+            setTimeout(() => {
+                setAlert(null);
+                onClose();
+            }, 2000);
         } catch (error) {
             console.error('Error creando cliente', error);
             setAlert({ type: 'error', message: 'Error al crear cliente. Intenta de nuevo.' });

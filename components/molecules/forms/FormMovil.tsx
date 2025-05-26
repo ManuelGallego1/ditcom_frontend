@@ -21,6 +21,8 @@ import { useModelosByMarca } from '@/hooks/useModelosByMarca';
 import { usePlanes } from '@/hooks/usePlanes';
 import { useClienteByCC } from '@/hooks/useClienteByCC';
 import CreateClienteModal from '@/components/molecules/modals/ModalCliente';
+import Field from '@/components/atoms/Field';
+import SelectField from '@/components/atoms/SelectField';
 
 type AlertType = 'success' | 'error' | 'info' | 'warning';
 
@@ -53,7 +55,7 @@ export default function FormMovil() {
   } = useForm<MovilDTO>({
     resolver: zodResolver(MovilSchema),
     defaultValues: {
-      vendedor_id: 16,
+      vendedor_id: vendedorIdFromCookie,
       min: '',
       imei: '',
       iccid: '',
@@ -206,7 +208,7 @@ export default function FormMovil() {
               options={[{ label: 'residencial', value: 'residencial' }, { label: 'pyme', value: 'pyme' }]}
             />
 
-            <input type="hidden" value={16} {...register('vendedor_id')} />
+            <input type="hidden" value={vendedorIdFromCookie} {...register('vendedor_id')} />
 
             <SelectField
               name="financiera"
@@ -244,33 +246,5 @@ export default function FormMovil() {
         )}
       </div>
     </>
-  );
-}
-
-function Field({ label, name, register, error, type = 'text', readOnly = false }: any) {
-  const inputProps = type === 'number' ? { valueAsNumber: true } : {};
-  return (
-    <div className={tokens.formGroup}>
-      <label className={tokens.formLabel}>{label}</label>
-      <input type={type} {...register(name, inputProps)} className={tokens.input} readOnly={readOnly} />
-      {error && <p className={tokens.errorText}>{error.message}</p>}
-    </div>
-  );
-}
-
-function SelectField({ label, name, register, error, options, valueAsNumber = false }: any) {
-  return (
-    <div className={tokens.formGroup}>
-      <label className={tokens.formLabel}>{label}</label>
-      <select {...register(name, valueAsNumber ? { valueAsNumber: true } : {})} className={tokens.input}>
-        <option value="">Seleccione una opción</option>
-        {options.map((option: any, index: number) => (
-          <option key={index} value={option.value ?? option}>
-            {option.label ?? option}
-          </option>
-        ))}
-      </select>
-      {error && <p className={tokens.errorText}>{error.message}</p>}
-    </div>
   );
 }

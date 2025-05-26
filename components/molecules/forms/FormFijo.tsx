@@ -1,113 +1,170 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FijoDTO } from '@/interfaces/FijoInterface';
+import { FijoScheme } from '@/schemes/FijoScheme';
 import { createFijo } from '@/libs/fijo-service';
-import { fijoSchema } from '@/schemes/FijoScheme';
+import { FijoDTO, TipoProducto, TotalAdicionales, TotalServicios, Estrato } from '@/interfaces/FijoInterface';
 import { z } from 'zod';
 import tokens from '@/utils/Token';
 import CustomButton from '@/components/atoms/CustomButton';
+import AlertBox from '@/components/atoms/AlertBox';
+import Loading from '@/components/atoms/Loading';
+import Field from '@/components/atoms/Field';
+import SelectField from '@/components/atoms/SelectField';
+import Cookies from 'js-cookie';
+import { useClienteByCC } from '@/hooks/useClienteByCC';
+import CreateClienteModal from '@/components/molecules/modals/ModalCliente';
 
-type FijoFormDTO = z.infer<typeof fijoSchema>;
-
-const Estrato = ['1', '2', '3', '4', '5', '6', 'NR'];
-const TipoProducto = ['residencial', 'negocio'];
-const TotalServicios = ['1', '2', '3'];
-const TotalAdicionales = ['0', '1', '2', '3'];
-const EstadoList = ['digitado', 'pendiente', 'instalado', 'legalizado'];
+type FijoFormDTO = z.infer<typeof FijoScheme>;
+type AlertType = 'success' | 'error' | 'info' | 'warning';
+const estratoOptions = Object.values(Estrato);
+const tipoProductoList = Object.values(TipoProducto);
+const totalServiciosList = Object.values(TotalServicios);
+const totalAdicionalesList = Object.values(TotalAdicionales);
 
 export default function FormFijo() {
+  const userCookie = Cookies.get('user');
+  const vendedorIdFromCookie = userCookie ? JSON.parse(userCookie).id ?? 0 : 0;
+
+  const {
+    cliente,
+    existe,
+    loading: loadingCliente,
+    error: errorCliente,
+    buscarCliente
+  } = useClienteByCC();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
+    getValues,
   } = useForm<FijoFormDTO>({
-    resolver: zodResolver(fijoSchema),
+    resolver: zodResolver(FijoScheme),
     defaultValues: {
       fecha_instalacion: '',
       fecha_legalizacion: '',
       servicios_adicionales: '',
-      estrato: 'NR',
+      estrato: Estrato.NR,
       cuenta: 0,
       OT: 0,
-      tipo_producto: 'residencial',
-      total_servicios: null,
-      total_adicionales: null,
+      tipo_producto: TipoProducto.RESIDENCIAL,
+      total_servicios: TotalServicios.CERO,
+      total_adicionales: TotalAdicionales.CERO,
       cliente_cc: '',
-      vendedor_id: 0,
-      estado: 'digitado',
+      vendedor_id: vendedorIdFromCookie,
       convergente: '',
-      ciudad: '',
-    },
+      ciudad: ''
+    }
   });
 
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState<{ type: AlertType; message: string } | null>(null);
+  const [fadeOut, setFadeOut] = useState(false);
+
   const onSubmit: SubmitHandler<FijoFormDTO> = async (data) => {
+    setLoading(true);
+    setAlert(null);
     try {
       const response = await createFijo(data as FijoDTO);
-      alert('Registro creado correctamente.');
-      console.log('Respuesta del servidor:', response);
+      setAlert({ type: 'success', message: 'Registro fijo creado correctamente.' });
+      reset();
     } catch (error) {
       console.error('Error al procesar el registro:', error);
-      alert('Error al procesar el registro. Inténtalo de nuevo más tarde.');
+      setAlert({ type: 'error', message: 'Error al procesar el registro.' });
+    } finally {
+      setLoading(false);
+      setFadeOut(false);
+      setTimeout(() => setFadeOut(true), 2500);
+      setTimeout(() => {
+        setAlert(null);
+        setFadeOut(false);
+      }, 3000);
+    }
+  };
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleClienteCheck = async () => {
+    const cc = getValues('cliente_cc');
+    if (!cc) return;
+    await buscarCliente(cc);
+
+    if (existe === false) {
+      setModalOpen(true);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={tokens.loginCard}>
-      <h4 className="text-xl font-semibold text-white mb-6">Crear Registro Fijo</h4>
-      <div className="h-[60vh] overflow-y-auto space-y-5">
-        <InputField label="Fecha de Instalación" type="date" register={register} name="fecha_instalacion" error={errors.fecha_instalacion} />
-        <InputField label="Fecha de Legalización" type="date" register={register} name="fecha_legalizacion" error={errors.fecha_legalizacion} />
-        <InputField label="Servicios Adicionales" register={register} name="servicios_adicionales" error={errors.servicios_adicionales} />
-        <SelectField label="Estrato" name="estrato" register={register} error={errors.estrato} options={Estrato} />
-        <InputField label="Cuenta" type="number" register={register} name="cuenta" error={errors.cuenta} />
-        <InputField label="OT" type="number" register={register} name="OT" error={errors.OT} />
-        <SelectField label="Tipo de Producto" name="tipo_producto" register={register} error={errors.tipo_producto} options={TipoProducto} />
-        <SelectField label="Total Servicios" name="total_servicios" register={register} error={errors.total_servicios} options={TotalServicios} allowNull />
-        <SelectField label="Total Adicionales" name="total_adicionales" register={register} error={errors.total_adicionales} options={TotalAdicionales} allowNull />
-        <InputField label="Cédula del Cliente" register={register} name="cliente_cc" error={errors.cliente_cc} />
-        <InputField label="ID Vendedor" type="number" register={register} name="vendedor_id" error={errors.vendedor_id} />
-        <SelectField label="Estado" name="estado" register={register} error={errors.estado} options={EstadoList} />
-        <InputField label="Convergente" register={register} name="convergente" error={errors.convergente} />
-        <InputField label="Ciudad" register={register} name="ciudad" error={errors.ciudad} />
-        <CustomButton
-          text="Crear Registro"
-          color="primaryButton"
-          typeButton="submit"
-          icon="Plus"
+    <div className="flex justify-center items-center h-full w-full p-4">
+      <form onSubmit={handleSubmit(onSubmit)} className={`${tokens.formCardWrapper} w-[40vw]`}>
+        <h4 className={tokens.formTitle}>Crear Registro Fijo</h4>
+        <div className={tokens.formScrollableBody}>
+          <Field label="Fecha Legalización" name="fecha_legalizacion" register={register} error={errors.fecha_legalizacion} type="date" />
+          <Field label="Servicios Adicionales" name="servicios_adicionales" register={register} error={errors.servicios_adicionales} />
+          <SelectField label="Estrato" name="estrato" register={register} error={errors.estrato} options={estratoOptions} />
+          <Field label="Cuenta" name="cuenta" register={register} error={errors.cuenta} type="number" />
+          <Field label="OT" name="OT" register={register} error={errors.OT} type="number" />
+          <SelectField label="Tipo Producto" name="tipo_producto" register={register} error={errors.tipo_producto} options={tipoProductoList} />
+          <SelectField label="Total Servicios" name="total_servicios" register={register} error={errors.total_servicios} options={totalServiciosList} />
+          <SelectField label="Total Adicionales" name="total_adicionales" register={register} error={errors.total_adicionales} options={totalAdicionalesList} />
+          <div className={tokens.formGroup}>
+            <label className={tokens.formLabel}>Cliente CC</label>
+            <div className="flex gap-2 items-center">
+              <input {...register('cliente_cc')} className={tokens.input} />
+              <CustomButton
+                text={
+                  cliente?.cc
+                    ? 'Asignado'
+                    : existe === false
+                      ? 'Crear'
+                      : 'Buscar'
+                }
+                color="primaryButton"
+                typeButton="button"
+                onClickButton={handleClienteCheck}
+              />
+
+              {loadingCliente && <Loading />}
+            </div>
+            {errors.cliente_cc && <p className={tokens.errorText}>{errors.cliente_cc.message}</p>}
+            {existe === false && !loadingCliente && (
+              <p className="mt-2 font-bold">Cliente no encontrado. Puede crearlo.</p>
+            )}
+          </div>
+          <input type="hidden" value={vendedorIdFromCookie} {...register('vendedor_id')} />
+          <Field label="Convergente" name="convergente" register={register} error={errors.convergente} />
+          <Field label="Ciudad" name="ciudad" register={register} error={errors.ciudad} />
+
+          {loading ? (
+            <div className="flex justify-center my-4"><Loading /></div>
+          ) : (
+            <CustomButton text="Crear Registro" color="primaryButton" typeButton="submit" icon="plus" />
+          )}
+        </div>
+      </form>
+
+      {alert && (
+        <AlertBox
+          type={alert.type}
+          message={alert.message}
+          onClose={() => setAlert(null)}
         />
-      </div>
-    </form>
-  );
-}
+      )}
 
-function InputField({ label, name, register, error, type = 'text' }: any) {
-  return (
-    <div className={tokens.formGroup}>
-      <label className={tokens.label}>{label}</label>
-      <input
-        type={type}
-        {...register(name)}
-        className={tokens.input}
-      />
-      {error && <p className={tokens.errorText}>{error.message}</p>}
-    </div>
-  );
-}
-
-function SelectField({ label, name, register, error, options, allowNull = false }: any) {
-  return (
-    <div className={tokens.formGroup}>
-      <label className={tokens.label}>{label}</label>
-      <select {...register(name)} className={tokens.input}>
-        {allowNull && <option value="">Seleccione una opción</option>}
-        {options.map((option: string) => (
-          <option key={option} value={option}>{option}</option>
-        ))}
-      </select>
-      {error && <p className={tokens.errorText}>{error.message}</p>}
+      {modalOpen && (
+        <CreateClienteModal
+          ccInicial={getValues('cliente_cc')}
+          onClose={() => setModalOpen(false)}
+          onClienteCreado={() => {
+            setModalOpen(false);
+            buscarCliente(getValues('cliente_cc'));
+          }}
+        />
+      )}
     </div>
   );
 }

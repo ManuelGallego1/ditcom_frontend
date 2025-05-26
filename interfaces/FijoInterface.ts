@@ -42,9 +42,7 @@ export interface FijoDTO {
     total_servicios: TotalServicios;
     total_adicionales: TotalAdicionales;
     cliente_cc: string;
-    sede_id: number;
     vendedor_id: number;
-    estado: Estado;
     convergente: string;
     ciudad: string;
 }
