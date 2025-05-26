@@ -10,10 +10,15 @@ import AlertBox from '@/components/atoms/AlertBox';
 import Pagination from '@/components/atoms/Pagination';
 import SearchInput from '@/components/atoms/SearchInput';
 import tokens from '@/utils/Token';
+import Cookies from 'js-cookie';
 
 type AlertType = 'success' | 'error' | 'info' | 'warning';
 
 export default function TableFijos() {
+    const getUserRole = () => {
+        const userCookie = Cookies.get('user');
+        return userCookie ? JSON.parse(userCookie).role : 'user';
+    };
     const [isLoading, setIsLoading] = useState(true);
     const [allFijos, setAllFijos] = useState<FijoDAO[]>([]);
     const [fijosList, setFijosList] = useState<FijoDAO[]>([]);
@@ -127,7 +132,7 @@ export default function TableFijos() {
                                         <td className={tokens.tableCell}>{fijo.ciudad}</td>
                                         <td className={tokens.tableCellCenter}>
                                             <div className={tokens.actionWrapper}>
-                                                <Link href={`/admin/fijo/${fijo.id}`}>
+                                                <Link href={`/${getUserRole()}/fijo/${fijo.id}`}>
                                                     <span className={tokens.viewAction}><CustomIcons.info /> Ver</span>
                                                 </Link>
                                                 <button onClick={() => handleDelete(fijo.id)} className={tokens.deleteAction}>

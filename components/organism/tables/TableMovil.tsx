@@ -10,10 +10,15 @@ import AlertBox from '@/components/atoms/AlertBox';
 import Pagination from '@/components/atoms/Pagination';
 import SearchInput from '@/components/atoms/SearchInput';
 import tokens from '@/utils/Token';
+import Cookies from 'js-cookie';
 
 type AlertType = 'success' | 'error' | 'info' | 'warning';
 
 export default function TableMoviles() {
+    const getUserRole = () => {
+        const userCookie = Cookies.get('user');
+        return userCookie ? JSON.parse(userCookie).role : 'user';
+    };
     const [isLoading, setIsLoading] = useState(true);
     const [allMoviles, setAllMoviles] = useState<MovilDAO[]>([]);
     const [movilesList, setMovilesList] = useState<MovilDAO[]>([]);
@@ -127,7 +132,7 @@ export default function TableMoviles() {
                                         <td className={tokens.tableCell}>{movil.plan?.nombre || 'N/A'}</td>
                                         <td className={tokens.tableCellCenter}>
                                             <div className={tokens.actionWrapper}>
-                                                <Link href={`/admin/movil/${movil.id}`}>
+                                                <Link href={`/${getUserRole()}/movil/${movil.id}`}>
                                                     <span className={tokens.viewAction}><CustomIcons.info /> Ver</span>
                                                 </Link>
                                                 <button onClick={() => handleDelete(movil.id)} className={tokens.deleteAction}>

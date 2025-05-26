@@ -3,7 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Crear - Fijo | Ditcom',
+    title: 'Asesor Crear - Fijo | Ditcom',
     description: 'Crea un nuevo producto Fijo en Ditcom',
 };
 
