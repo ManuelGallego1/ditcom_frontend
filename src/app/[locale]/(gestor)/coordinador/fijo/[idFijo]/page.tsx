@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getFijoByIdServer } from '@/src/libs/fijo-server-service';
 
 interface FijoPageProps {
-    params: { idFijo: string };
+    params: Promise<{ idFijo: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,11 +14,12 @@ export async function generateStaticParams() {
     return staticFijos;
 }
 
-export async function generateMetadata({
-    params,
-}: {
-    params: { idFijo: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+    props: {
+        params: Promise<{ idFijo: string }>;
+    }
+): Promise<Metadata> {
+    const params = await props.params;
     const { idFijo } = params;
 
     try {
@@ -38,7 +39,8 @@ export async function generateMetadata({
     }
 }
 
-export default async function FijoPage({ params }: FijoPageProps) {
+export default async function FijoPage(props: FijoPageProps) {
+    const params = await props.params;
     const { idFijo } = params;
     let fijo;
 

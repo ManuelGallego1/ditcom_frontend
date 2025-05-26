@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getPlanByIdServer } from '@/src/libs/plan-server-service';
 
 interface PlanPageProps {
-    params: { idPlan: string };
+    params: Promise<{ idPlan: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,11 +14,12 @@ export async function generateStaticParams() {
     return staticPlanes;
 }
 
-export async function generateMetadata({
-    params,
-}: {
-    params: { idPlan: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+    props: {
+        params: Promise<{ idPlan: string }>;
+    }
+): Promise<Metadata> {
+    const params = await props.params;
     const { idPlan } = params;
 
     try {
@@ -38,7 +39,8 @@ export async function generateMetadata({
     }
 }
 
-export default async function PlanPage({ params }: PlanPageProps) {
+export default async function PlanPage(props: PlanPageProps) {
+    const params = await props.params;
     const { idPlan } = params;
     let plan;
 

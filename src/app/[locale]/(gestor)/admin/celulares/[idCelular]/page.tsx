@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getCelularByIdServer } from '@/src/libs/celular-server-service';
 
 interface CelularPageProps {
-    params: { idCelular: string };
+    params: Promise<{ idCelular: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,11 +14,12 @@ export async function generateStaticParams() {
     return staticCelulares;
 }
 
-export async function generateMetadata({
-    params,
-}: {
-    params: { idCelular: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+    props: {
+        params: Promise<{ idCelular: string }>;
+    }
+): Promise<Metadata> {
+    const params = await props.params;
     const { idCelular } = params;
 
     try {
@@ -38,7 +39,8 @@ export async function generateMetadata({
     }
 }
 
-export default async function CelularPage({ params }: CelularPageProps) {
+export default async function CelularPage(props: CelularPageProps) {
+    const params = await props.params;
     const { idCelular } = params;
     let celular;
 

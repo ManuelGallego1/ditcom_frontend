@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getSedeByIdServer } from '@/src/libs/sede-server-service';
 
 interface SedePageProps {
-    params: { idSede: string };
+    params: Promise<{ idSede: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,11 +14,12 @@ export async function generateStaticParams() {
     return staticSedes;
 }
 
-export async function generateMetadata({
-    params,
-}: {
-    params: { idSede: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+    props: {
+        params: Promise<{ idSede: string }>;
+    }
+): Promise<Metadata> {
+    const params = await props.params;
     const { idSede } = params;
 
     try {
@@ -38,7 +39,8 @@ export async function generateMetadata({
     }
 }
 
-export default async function SedePage({ params }: SedePageProps) {
+export default async function SedePage(props: SedePageProps) {
+    const params = await props.params;
     const { idSede } = params;
     let sede;
 

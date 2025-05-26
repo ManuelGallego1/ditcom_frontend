@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getMovilByIdServer } from '@/src/libs/movil-server-service';
 
 interface MovilPageProps {
-    params: { idMovil: string };
+    params: Promise<{ idMovil: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,11 +14,12 @@ export async function generateStaticParams() {
     return staticMoviles;
 }
 
-export async function generateMetadata({
-    params,
-}: {
-    params: { idMovil: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+    props: {
+        params: Promise<{ idMovil: string }>;
+    }
+): Promise<Metadata> {
+    const params = await props.params;
     const { idMovil } = params;
 
     try {
@@ -38,7 +39,8 @@ export async function generateMetadata({
     }
 }
 
-export default async function MovilPage({ params }: MovilPageProps) {
+export default async function MovilPage(props: MovilPageProps) {
+    const params = await props.params;
     const { idMovil } = params;
     let movil;
 
