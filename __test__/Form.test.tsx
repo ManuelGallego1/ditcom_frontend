@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Form from '@/components/molecules/forms/FormLogin';
+import Form from '@/src/components/molecules/forms/FormLogin';
 import '@testing-library/jest-dom';
 
 describe('Validación de formulario de login', () => {
