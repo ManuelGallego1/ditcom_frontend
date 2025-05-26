@@ -1,17 +1,12 @@
 {
-  "login.title": "Sign in",
-  "login.subtitle": "Access with your credentials",
-  "login.email": "Email",
-  "login.password": "Password",
-  "login.button": "Login",
-  "login.forgotPassword": "Forgot your password?",
-
-  "common.loading": "Loading...",
-  "common.error": "Something went wrong",
-
-  "roles.admin": "Administrator",
-  "roles.activador": "Activator",
-  "roles.asesor": "Advisor",
-  "roles.coordinador": "Coordinator",
-  "roles.pyme": "SMB"
+  "Home": {
+    "welcome": "Welcome to our platform, where we offer the best services.",
+    "loginButton": "Log In"
+  },
+  "Login": {
+    "username": "Username",
+    "password": "Password",
+    "submitButton": "Log In",
+    "Error message": "One of the fields is incorrect or the user does not exist"
+  }
 }

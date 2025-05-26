@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import FormLogin from '@/components/molecules/forms/FormLogin';
 import tokens from '@/utils/Token';
-
 export default function ScreenLogin() {
   return (
     <section className={tokens.loginContainer}>
