@@ -197,6 +197,7 @@ const config: Config = {
         light: '#8B0000',
         dark: '#3B030A',
       },
+      currentColor: '#343a40',
     },
     screens: {
       '2xsm': '375px',

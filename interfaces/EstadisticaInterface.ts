@@ -1,5 +1,7 @@
+import { UserDAO } from "./UserInterface";
+
 export interface MejorVendedor {
-    mejor_vendedor: string | null;
+    mejor_vendedor: UserDAO;
     ventas_fijo: number;
     ventas_movil: number;
     ventas_totales: number;
