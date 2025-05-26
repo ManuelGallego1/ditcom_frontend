@@ -1,10 +1,14 @@
-const path = require('path');
+import path from 'path';
+import { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
 
-const nextConfig = {
-  webpack(config: any) {
+const nextConfig: NextConfig = {
+  webpack(config) {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
     return config;
   },
 };
 
-module.exports = nextConfig;
+const withNextIntl = createNextIntlPlugin();
+
+export default withNextIntl(nextConfig);
