@@ -29,7 +29,7 @@ export default function FormUsers() {
             const response = await createUser(data); 
             if (response.status === 201 && response.data) {
                 setAlert({ type: 'success', message: 'Usuario registrado correctamente.' });
-                reset(); // limpia el formulario
+                reset();
             } else if (response.message) {
                 setAlert({ type: 'error', message: response.message });
             }

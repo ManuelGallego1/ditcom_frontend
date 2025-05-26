@@ -77,7 +77,6 @@ export default function FormMovil() {
   const [fadeOut, setFadeOut] = useState(false);
 
   const onSubmit: SubmitHandler<MovilDTO> = async (data) => {
-    console.log('Formulario enviado:', data);
     setLoading(true);
     setAlert(null);
     try {
@@ -89,9 +88,15 @@ export default function FormMovil() {
       } else if ((response as any).message) {
         setAlert({ type: 'error', message: (response as any).message });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error al crear móvil:', error);
-      setAlert({ type: 'error', message: 'Error al crear el móvil.' });
+      if (error?.message) {
+        setAlert({ type: 'error', message: error.message });
+      } else if (typeof error === 'object' && error !== null && 'message' in error) {
+        setAlert({ type: 'error', message: (error as any).message });
+      } else {
+        setAlert({ type: 'error', message: 'Error al crear el móvil. Inténtalo de nuevo.' });
+      }
     } finally {
       setLoading(false);
       setFadeOut(false);

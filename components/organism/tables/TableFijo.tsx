@@ -127,7 +127,7 @@ export default function TableFijos() {
                                         <td className={tokens.tableCell}>{fijo.ciudad}</td>
                                         <td className={tokens.tableCellCenter}>
                                             <div className={tokens.actionWrapper}>
-                                                <Link href={`/admin/fijos/${fijo.id}`}>
+                                                <Link href={`/admin/fijo/${fijo.id}`}>
                                                     <span className={tokens.viewAction}><CustomIcons.info /> Ver</span>
                                                 </Link>
                                                 <button onClick={() => handleDelete(fijo.id)} className={tokens.deleteAction}>

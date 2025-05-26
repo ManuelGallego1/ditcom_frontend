@@ -1,4 +1,9 @@
 import { DefaultInterfaceResponse } from "./DefaultInterface";
+import { UserDAO } from "./UserInterface";
+import { SedeDAO } from "./SedeInterface";
+import { ClienteDAO } from "./ClienteInterface";
+import { CelularDAO } from "./CelularInterface";
+import { PlanDAO } from "./PlanInterface";
 
 export interface MovilDAO {
     id: number;
@@ -21,51 +26,11 @@ export interface MovilDAO {
     financiera: Financiera;
     coordinador_id: number;
     estado: Estado;
-    vendedor: {
-        id: number;
-        name: string;
-        username: string;
-        role: string;
-        activo: number;
-        created_at: string;
-        updated_at: string;
-    }
-    sede: {
-        id: number;
-        nombre: string;
-        coordinador_id: number;
-        activo: number;
-        created_at: string;
-        updated_at: string;
-        coordinador?: {
-            id: number;
-            name: string;
-            username: string;
-            role: string;
-            activo: number;
-            created_at: string;
-            updated_at: string;
-        }
-    }
-    cliente: {
-        cc: string;
-        p_nombre: string;
-        s_nombre: string;
-        p_apellido: string;
-        s_apellido: string | null;
-        email: string;
-        numero: string;
-        created_at: string;
-        updated_at: string;
-    }
-    plan: {
-        id: number;
-        codigo: string;
-        nombre: string;
-        activo: number;
-        created_at: string;
-        updated_at: string;
-    }
+    vendedor: UserDAO
+    sede: SedeDAO;
+    cliente: ClienteDAO;
+    plan: PlanDAO;
+    celular: CelularDAO;
 }
 
 export interface MovilServiceDetail extends DefaultInterfaceResponse<MovilDAO> {}
@@ -89,12 +54,31 @@ export interface MovilDTO {
     marca?: string;
 }
 
+export interface MovilUpdateDTO {
+    id: number;
+    min?: string | null;
+    imei?: string | null;
+    iccid?: string | null;
+    tipo?: TipoMovil | null;
+    plan_id?: number | null;
+    celulares_id?: number | null;
+    cliente_cc?: string | null;
+    tipo_producto?: TipoProducto | null;
+    factura?: string | null;
+    ingreso_caja?: string | null;
+    valor_recarga?: number | null;
+    valor_total?: number | null;
+    vendedor_id?: number | null;
+    estado?: Estado | null;
+    financiera?: Financiera | null;
+}
+
 export enum Estado {
-    DIGITADO = "digitado",
-    RECLAMAR = "reclamar",
-    INSTALADO = "instalado",
-    CANCELADO = "cancelado",
-    RAZONADO = "razonado",
+    PENDIENTE = "pendiente",
+    EXITOSA = "exitosa",
+    RECHAZADA = "rechazada",
+    CANCELADA = "cancelada",
+    TERMINADA = "terminada",
 }
 
 export enum TipoMovil {

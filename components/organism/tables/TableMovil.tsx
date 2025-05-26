@@ -127,7 +127,7 @@ export default function TableMoviles() {
                                         <td className={tokens.tableCell}>{movil.plan?.nombre || 'N/A'}</td>
                                         <td className={tokens.tableCellCenter}>
                                             <div className={tokens.actionWrapper}>
-                                                <Link href={`/admin/moviles/${movil.id}`}>
+                                                <Link href={`/admin/movil/${movil.id}`}>
                                                     <span className={tokens.viewAction}><CustomIcons.info /> Ver</span>
                                                 </Link>
                                                 <button onClick={() => handleDelete(movil.id)} className={tokens.deleteAction}>

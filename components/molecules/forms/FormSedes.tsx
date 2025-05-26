@@ -20,7 +20,6 @@ export default function FormSede() {
     resolver: zodResolver(sedeScheme),
   });
 
-  // Usa el hook para traer coordinadores
   const { items: coordinadores, loading: loadingCoordinadores, error } = useUsersByRole('coordinador');
 
   const [loading, setLoading] = React.useState(false);
@@ -73,7 +72,7 @@ export default function FormSede() {
                 </option>
                 {coordinadores.map((coord) => (
                   <option key={coord.id} value={coord.id}>
-                    {coord.name} {/* o cualquier campo que identifique al coordinador */}
+                    {coord.name}
                   </option>
                 ))}
               </select>

@@ -42,6 +42,7 @@ export default function FormFijo() {
     formState: { errors },
     reset,
     getValues,
+    setValue,
   } = useForm<FijoFormDTO>({
     resolver: zodResolver(FijoScheme),
     defaultValues: {
@@ -72,9 +73,15 @@ export default function FormFijo() {
       const response = await createFijo(data as FijoDTO);
       setAlert({ type: 'success', message: 'Registro fijo creado correctamente.' });
       reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error al procesar el registro:', error);
-      setAlert({ type: 'error', message: 'Error al procesar el registro.' });
+      if (error?.message) {
+        setAlert({ type: 'error', message: error.message });
+      } else if (typeof error === 'object' && error !== null && 'message' in error) {
+        setAlert({ type: 'error', message: (error as any).message });
+      } else {
+        setAlert({ type: 'error', message: 'Error al procesar el registro. Inténtalo de nuevo.' });
+      }
     } finally {
       setLoading(false);
       setFadeOut(false);
@@ -103,6 +110,7 @@ export default function FormFijo() {
       <form onSubmit={handleSubmit(onSubmit)} className={`${tokens.formCardWrapper} w-[40vw]`}>
         <h4 className={tokens.formTitle}>Crear Registro Fijo</h4>
         <div className={tokens.formScrollableBody}>
+          <Field label="Fecha Instalación" name="fecha_instalacion" register={register} error={errors.fecha_instalacion} type="date" />
           <Field label="Fecha Legalización" name="fecha_legalizacion" register={register} error={errors.fecha_legalizacion} type="date" />
           <Field label="Servicios Adicionales" name="servicios_adicionales" register={register} error={errors.servicios_adicionales} />
           <SelectField label="Estrato" name="estrato" register={register} error={errors.estrato} options={estratoOptions} />

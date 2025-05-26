@@ -1,13 +1,25 @@
-import { MovilDTO, MovilServiceDetail, MovilServiceList } from "@/interfaces/MovilInterface";
+import { MovilDTO, MovilServiceDetail, MovilServiceList, MovilUpdateDTO } from "@/interfaces/MovilInterface";
+import { ErrorResponse } from "@/interfaces/DefaultInterface";
 import Cookies from 'js-cookie';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const handleErrorResponse = async (response: Response) => {
+    let errorData: ErrorResponse;
+    try {
+        errorData = await response.json();
+    } catch {
+        errorData = { status: response.status, message: response.statusText || 'Unknown error' };
+    }
+    console.error('Fetch error:', errorData.message);
+    throw errorData;
+};
 
 export const getMoviles = async (url?: string): Promise<MovilServiceList> => {
     const apiUrl = url || `${API_URL}/api/moviles`;
     const token = Cookies.get('token');
     if (!token) {
-        throw new Error('No se encontró el token de autenticación.');
+        throw { status: 401, message: 'No se encontró el token de autenticación.' } as ErrorResponse;
     }
 
     const headersOptions = {
@@ -21,12 +33,16 @@ export const getMoviles = async (url?: string): Promise<MovilServiceList> => {
     try {
         const response = await fetch(apiUrl, headersOptions);
         if (!response.ok) {
-            throw new Error(`Error: ${response.status} ${response.statusText}`);
+            await handleErrorResponse(response);
         }
         const data: MovilServiceList = await response.json();
         return data;
     } catch (error) {
-        console.error('Fetch error:', error);
+        if (error && (error as ErrorResponse).message) {
+            console.error('Fetch error:', (error as ErrorResponse).message);
+        } else {
+            console.error('Fetch error:', error);
+        }
         throw error;
     }
 }
@@ -34,7 +50,7 @@ export const getMoviles = async (url?: string): Promise<MovilServiceList> => {
 export const getMovilById = async (id: string): Promise<MovilServiceDetail> => {
     const token = Cookies.get('token');
     if (!token) {
-        throw new Error('No se encontró el token de autenticación.');
+        throw { status: 401, message: 'No se encontró el token de autenticación.' } as ErrorResponse;
     }
 
     const headersOptions = {
@@ -48,12 +64,16 @@ export const getMovilById = async (id: string): Promise<MovilServiceDetail> => {
     try {
         const response = await fetch(`${API_URL}/api/moviles/${id}`, headersOptions);
         if (!response.ok) {
-            throw new Error(`Error: ${response.status} ${response.statusText}`);
+            await handleErrorResponse(response);
         }
         const data: MovilServiceDetail = await response.json();
         return data;
     } catch (error) {
-        console.error('Fetch error:', error);
+        if (error && (error as ErrorResponse).message) {
+            console.error('Fetch error:', (error as ErrorResponse).message);
+        } else {
+            console.error('Fetch error:', error);
+        }
         throw error;
     }
 }
@@ -61,7 +81,7 @@ export const getMovilById = async (id: string): Promise<MovilServiceDetail> => {
 export const createMovil = async (movil: MovilDTO): Promise<MovilServiceDetail> => {
     const token = Cookies.get('token');
     if (!token) {
-        throw new Error('No se encontró el token de autenticación.');
+        throw { status: 401, message: 'No se encontró el token de autenticación.' } as ErrorResponse;
     }
 
     const headersOptions = {
@@ -76,20 +96,24 @@ export const createMovil = async (movil: MovilDTO): Promise<MovilServiceDetail> 
     try {
         const response = await fetch(`${API_URL}/api/moviles`, headersOptions);
         if (!response.ok) {
-            throw new Error(`Error: ${response.status} ${response.statusText}`);
+            await handleErrorResponse(response);
         }
         const data: MovilServiceDetail = await response.json();
         return data;
     } catch (error) {
-        console.error('Fetch error:', error);
+        if (error && (error as ErrorResponse).message) {
+            console.error('Fetch error:', (error as ErrorResponse).message);
+        } else {
+            console.error('Fetch error:', error);
+        }
         throw error;
     }
 }
 
-export const updateMovil = async (id: string, movil: MovilDTO): Promise<MovilServiceDetail> => {
+export const updateMovil = async (id: string, movil: MovilUpdateDTO): Promise<MovilServiceDetail> => {
     const token = Cookies.get('token');
     if (!token) {
-        throw new Error('No se encontró el token de autenticación.');
+        throw { status: 401, message: 'No se encontró el token de autenticación.' } as ErrorResponse;
     }
 
     const headersOptions = {
@@ -104,12 +128,16 @@ export const updateMovil = async (id: string, movil: MovilDTO): Promise<MovilSer
     try {
         const response = await fetch(`${API_URL}/api/moviles/${id}`, headersOptions);
         if (!response.ok) {
-            throw new Error(`Error: ${response.status} ${response.statusText}`);
+            await handleErrorResponse(response);
         }
         const data: MovilServiceDetail = await response.json();
         return data;
     } catch (error) {
-        console.error('Fetch error:', error);
+        if (error && (error as ErrorResponse).message) {
+            console.error('Fetch error:', (error as ErrorResponse).message);
+        } else {
+            console.error('Fetch error:', error);
+        }
         throw error;
     }
 }
@@ -117,7 +145,7 @@ export const updateMovil = async (id: string, movil: MovilDTO): Promise<MovilSer
 export const deleteMovil = async (id: string): Promise<void> => {
     const token = Cookies.get('token');
     if (!token) {
-        throw new Error('No se encontró el token de autenticación.');
+        throw { status: 401, message: 'No se encontró el token de autenticación.' } as ErrorResponse;
     }
 
     const headersOptions = {
@@ -131,10 +159,14 @@ export const deleteMovil = async (id: string): Promise<void> => {
     try {
         const response = await fetch(`${API_URL}/api/moviles/${id}`, headersOptions);
         if (!response.ok) {
-            throw new Error(`Error: ${response.status} ${response.statusText}`);
+            await handleErrorResponse(response);
         }
     } catch (error) {
-        console.error('Fetch error:', error);
+        if (error && (error as ErrorResponse).message) {
+            console.error('Fetch error:', (error as ErrorResponse).message);
+        } else {
+            console.error('Fetch error:', error);
+        }
         throw error;
     }
 }

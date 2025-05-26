@@ -9,11 +9,13 @@ interface Option {
 interface SelectFieldProps<T extends FieldValues> {
   name: keyof T;
   label: string;
-  register: UseFormRegister<T>;
+  register?: UseFormRegister<T>;
   error?: { message?: string };
   options: (string | Option)[];
   valueAsNumber?: boolean;
   readOnly?: boolean;
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function SelectField<T extends FieldValues>({
@@ -22,18 +24,29 @@ export default function SelectField<T extends FieldValues>({
   register,
   error,
   options,
+  value,
   valueAsNumber = false,
-  readOnly = false
+  readOnly = false,
+  onChange
 }: SelectFieldProps<T>) {
+  const id = String(name);
+
+  const registerProps = register
+    ? register(name as any, valueAsNumber ? { valueAsNumber: true } : {})
+    : {};
+
   return (
     <div className={tokens.formGroup}>
-      <label className={tokens.formLabel} htmlFor={String(name)}>
+      <label className={tokens.formLabel} htmlFor={id}>
         {label}
       </label>
       <select
-        id={String(name)}
-        {...register(name as any, valueAsNumber ? { valueAsNumber: true } : {})}
+        id={id}
+        {...registerProps}
         className={tokens.input}
+        name={id}
+        value={value}
+        onChange={onChange}
         disabled={readOnly}
       >
         <option value="">Seleccione una opción</option>

@@ -2,7 +2,6 @@ export interface DefaultInterfaceResponse<T = any> {
     data: T | null;
     status: number;
     message: string | null;
-    errors: Record<string, string[]> | null;
     current_page: number | null;
     next_page_url: string | null;
     path: string | null;
@@ -11,4 +10,10 @@ export interface DefaultInterfaceResponse<T = any> {
     last_page: number | null;
     to: number | null;
     total: number | null;
+}
+
+export interface ErrorResponse {
+    status: number;
+    message: string;
+    errors?: Record<string, string[]>;
 }
