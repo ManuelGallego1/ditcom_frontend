@@ -4,7 +4,7 @@ jest.mock('@/components/atoms/CustomButton', () => ({
   default: (props: any) => <button {...props}>{props.text}</button>,
 }));
 import { render, screen, fireEvent } from '@testing-library/react';
-import FormFijo from '@/components/molecules/forms/FormFijo';
+import FormFijo from '@/src/components/molecules/forms/FormFijo';
 
 describe('FormFijo', () => {
   it('renderiza el botón de crear registro', () => {

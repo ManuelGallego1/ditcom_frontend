@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import FormUsers from '@/components/molecules/forms/FormUsers';
+import FormUsers from '@/src/components/molecules/forms/FormUsers';
 
 describe('FormUsers', () => {
   it('renderiza todos los campos', () => {
