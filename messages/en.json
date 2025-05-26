@@ -1,0 +1,17 @@
+{
+  "login.title": "Sign in",
+  "login.subtitle": "Access with your credentials",
+  "login.email": "Email",
+  "login.password": "Password",
+  "login.button": "Login",
+  "login.forgotPassword": "Forgot your password?",
+
+  "common.loading": "Loading...",
+  "common.error": "Something went wrong",
+
+  "roles.admin": "Administrator",
+  "roles.activador": "Activator",
+  "roles.asesor": "Advisor",
+  "roles.coordinador": "Coordinator",
+  "roles.pyme": "SMB"
+}

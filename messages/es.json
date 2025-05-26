@@ -1,0 +1,17 @@
+{
+  "login.title": "Iniciar sesión",
+  "login.subtitle": "Accede con tus credenciales",
+  "login.email": "Correo electrónico",
+  "login.password": "Contraseña",
+  "login.button": "Entrar",
+  "login.forgotPassword": "¿Olvidaste tu contraseña?",
+
+
+  "common.error": "Algo salió mal",
+
+  "roles.admin": "Administrador",
+  "roles.activador": "Activador",
+  "roles.asesor": "Asesor",
+  "roles.coordinador": "Coordinador",
+  "roles.pyme": "Pyme"
+}
