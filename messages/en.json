@@ -1,6 +1,12 @@
 {
-  "home": {
+  "Home": {
     "welcome": "Welcome to our platform, where we offer the best services.",
     "loginButton": "Log In"
+  },
+  "Login": {
+    "username": "Username",
+    "password": "Password",
+    "submitButton": "Log In",
+    "Error message": "One of the fields is incorrect or the user does not exist"
   }
 }

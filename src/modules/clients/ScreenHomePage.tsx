@@ -6,9 +6,11 @@ import { useParams } from "next/navigation";
 import CustomButton from "@/src/components/atoms/CustomButton";
 import Loading from "@/src/components/atoms/Loading";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function HomePage() {
   const router = useRouter();
+  const t = useTranslations("Home"); 
   const { locale } = useParams();
   const [isRedirecting, setIsRedirecting] = useState(false);
 
@@ -36,9 +38,9 @@ export default function HomePage() {
       <div className="absolute inset-0 z-10 flex flex-col justify-between">
         <div className="w-full p-4 flex justify-between items-center">
           <Image src="/img/png/logo.png" alt="Logo" width={200} height={200} />
-          
+
           <CustomButton
-            text="Iniciar Sesión"
+            text={t("loginButton")}
             color="secondaryButton"
             icon="login"
             onClickButton={handleLoginClick}
@@ -47,7 +49,7 @@ export default function HomePage() {
 
         <div className="p-8 text-white">
           <p className="text-xl font-semibold">
-            Bienvenido a nuestra plataforma, donde ofrecemos los mejores servicios.
+            {t("welcome")}
           </p>
         </div>
       </div>

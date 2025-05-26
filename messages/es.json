@@ -1,6 +1,12 @@
 {
-  "home": {
+  "Home": {
     "welcome": "Bienvenido a nuestra plataforma, donde ofrecemos los mejores servicios.",
     "loginButton": "Iniciar Sesión"
+  },
+  "Login" : {
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "submitButton": "Iniciar Sesión",
+    "Error message": "Alguno de los campos es incorrecto o el usuario no existe"
   }
 }

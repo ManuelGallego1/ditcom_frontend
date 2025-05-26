@@ -7,6 +7,12 @@ import { LoginDTO, LoginDAO } from '@/src/interfaces/LoginInterface';
 import { loginUser } from '@/src/libs/auth-services';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import tokens from '@/utils/Token';
+import CustomButton from '@/components/atoms/CustomButton';
+import AlertBox from '@/components/atoms/AlertBox';
+import Loading from '@/components/atoms/Loading';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import tokens from '@/src/utils/Token';
 import CustomButton from '@/src/components/atoms/CustomButton';
 import AlertBox from '@/src/components/atoms/AlertBox';
@@ -14,6 +20,7 @@ import Loading from '@/src/components/atoms/Loading';
 import { useState, useEffect } from 'react';
 
 export default function FormLogin() {
+  const t = useTranslations("Login"); 
   const {
     register,
     handleSubmit,
@@ -75,7 +82,7 @@ export default function FormLogin() {
         setShowError(false);
         setFadeOutError(false);
       }, 3000);
-      
+
       console.error('Login fallido:', error);
     } finally {
       setIsLoading(false);
@@ -87,7 +94,7 @@ export default function FormLogin() {
       {isLoading && <Loading />}
       <form onSubmit={handleSubmit(onSubmit)} className={isLoading ? 'pointer-events-none opacity-50' : ''}>
         <div className={tokens.formGroup}>
-          <label htmlFor="username" className={tokens.label}>Usuario</label>
+          <label htmlFor="username" className={tokens.label}>{t("username")}</label>
           <input
             id="username"
             type="text"
@@ -98,7 +105,7 @@ export default function FormLogin() {
         </div>
 
         <div className={tokens.formGroupPassword}>
-          <label htmlFor="password" className={tokens.label}>Contraseña</label>
+          <label htmlFor="password" className={tokens.label}>{t("password")}</label>
           <input
             id="password"
             type="password"
@@ -110,7 +117,7 @@ export default function FormLogin() {
 
         <div>
           <CustomButton
-            text="Iniciar Sesión"
+            text={t("loginButton")}
             color="primaryButton"
             typeButton="submit"
             onClickButton={() => { }}
@@ -118,13 +125,11 @@ export default function FormLogin() {
 
           {showError && (
             <div
-              className={`transition-opacity duration-500 ${
-                fadeOutError ? 'opacity-0' : 'opacity-100'
-              }`}
+              className={`transition-opacity duration-500 ${fadeOutError ? 'opacity-0' : 'opacity-100'}`}
             >
               <AlertBox
                 type="error"
-                message="Alguno de los campos es incorrecto o el usuario no existe"
+                message={t("errorMessage")}
               />
             </div>
           )}
