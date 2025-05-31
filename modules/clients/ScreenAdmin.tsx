@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import tokens from '@/utils/Token';
 
 const GraphVentasAnio = dynamic(() => import('@/components/molecules/graphics/GraphicVentas'), { ssr: false });
 const CardTotalFijos = dynamic(() => import('@/components/molecules/statistics/StatsVentasFijas'), { ssr: false });
@@ -10,7 +11,7 @@ const GraphMejorAsesor = dynamic(() => import('@/components/molecules/graphics/G
 export default function ScreenAdmin() {
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Dashboard Admin</h1>
+      <h1 className={tokens.title}>Dashboard Admin</h1>
 
       <div className="flex gap-4">
         <CardTotalFijos />

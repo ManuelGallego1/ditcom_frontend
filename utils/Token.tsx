@@ -1,3 +1,5 @@
+import { title } from "process";
+
 const tokens = {
   loginContainer: 'max-w-screen-sm mx-auto sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6',
   loginWrapper: 'container mx-auto flex justify-center items-center h-screen',
@@ -61,7 +63,7 @@ const tokens = {
   mt-6
 `,
 
-
+  title: 'text-2xl font-bold text-boxdark',
   formLabel: 'block mb-3 text-black dark:text-white font-medium',
   formTitle: 'mb-6 text-xl font-semibold text-black dark:text-white',
   dangerButton: 'w-full bg-white text-red font-medium py-3 px-5 rounded-4xl border border-transparent transition duration-300 hover:bg-red hover:text-white hover:border-white',

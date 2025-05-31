@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
+import tokens from '@/utils/Token';
 
 const GraphVentasAnio = dynamic(() => import('@/components/molecules/graphics/GraphicVentas'), { ssr: false });
 const CardTotalFijos = dynamic(() => import('@/components/molecules/statistics/StatsVentasFijas'), { ssr: false });
@@ -27,7 +28,7 @@ export default function ScreenAsesor() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Dashboard Coordinador</h1>
+      <h1 className={tokens.title}>Dashboard Coordinador</h1>
 
       <div className="flex justify-start gap-4">
         <CardTotalFijos coordinador_id={coordinador_id} />
