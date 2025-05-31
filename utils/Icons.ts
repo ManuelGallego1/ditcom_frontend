@@ -29,7 +29,9 @@ import {
   MdMap,
   MdWork,
   MdPlusOne,
-  MdTrendingUp
+  MdTrendingUp,
+  MdAddHome,
+  MdAddIcCall
 } from "react-icons/md";
 
 export const CustomIcons = {
@@ -63,5 +65,7 @@ export const CustomIcons = {
   plans: MdWork,
   locationSelect: MdMap,
   plus: MdPlusOne,
-  stonks: MdTrendingUp
+  stonks: MdTrendingUp,
+  addHome: MdAddHome,
+  addPhone: MdAddIcCall
 };

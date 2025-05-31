@@ -9,33 +9,33 @@ const CardTotalFijos = dynamic(() => import('@/components/molecules/statistics/S
 const CardTotalMovil = dynamic(() => import('@/components/molecules/statistics/StatsVentasMovil'), { ssr: false });
 
 export default function ScreenAsesor() {
-  const [vendedorId, setVendedorId] = useState<number | null>(null);
+  const [coordinador_id, setCoordinadorId] = useState<number | null>(null);
 
   useEffect(() => {
     const userCookie = Cookies.get('user');
     if (userCookie) {
       try {
         const user = JSON.parse(userCookie);
-        setVendedorId(user.id);
+        setCoordinadorId(user.id);
       } catch (error) {
         console.error('Error parsing user cookie', error);
       }
     }
   }, []);
 
-  if (!vendedorId) return <div>Cargando datos del asesor...</div>;
+  if (!coordinador_id) return <div>Cargando datos del coordinador...</div>;
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Dashboard Asesor</h1>
+      <h1 className="text-2xl font-bold">Dashboard Coordinador</h1>
 
       <div className="flex justify-start gap-4">
-        <CardTotalFijos coordinador_id={9} />
-        <CardTotalMovil coordinador_id={9} />
+        <CardTotalFijos coordinador_id={coordinador_id} />
+        <CardTotalMovil coordinador_id={coordinador_id} />
       </div>
 
       <div className="p-6">
-        <GraphVentasAnio coordinador_id={9} />
+        <GraphVentasAnio coordinador_id={coordinador_id} />
       </div>
     </div>
   );

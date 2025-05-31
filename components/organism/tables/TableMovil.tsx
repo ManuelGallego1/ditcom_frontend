@@ -33,11 +33,41 @@ export default function TableMoviles() {
         prevPageUrl: null as string | null,
     });
 
-    const fetchMoviles = async (url?: string) => {
+    const fetchMoviles = async (baseUrl?: string) => {
         setIsLoading(true);
         setError(null);
+
+        const getCustomFetchUrl = (url?: string) => {
+            const userCookie = Cookies.get('user');
+            const user = userCookie ? JSON.parse(userCookie) : null;
+
+            const params = new URLSearchParams();
+
+            if (!user) return url || `${process.env.NEXT_PUBLIC_API_URL}/api/moviles`;
+
+            switch (user.role) {
+                case 'vendedor':
+                    params.set('vendedor_id', user.id);
+                    break;
+                case 'coordinador':
+                    params.set('coordinador_id', user.id);
+                    break;
+                case 'pyme':
+                    params.set('ventas_pyme', '1');
+                    break;
+                default:
+                    break;
+            }
+
+            const queryString = params.toString();
+            const base = url || `${process.env.NEXT_PUBLIC_API_URL}/api/moviles`;
+            return queryString ? `${base}?${queryString}` : base;
+        };
+
         try {
-            const response: MovilServiceList = await getMoviles(url || '');
+            const finalUrl = getCustomFetchUrl(baseUrl);
+            const response: MovilServiceList = await getMoviles(finalUrl);
+
             if (Array.isArray(response.data)) {
                 setAllMoviles(response.data);
                 setMovilesList(response.data);
@@ -57,6 +87,7 @@ export default function TableMoviles() {
             setIsLoading(false);
         }
     };
+
 
     useEffect(() => {
         fetchMoviles();

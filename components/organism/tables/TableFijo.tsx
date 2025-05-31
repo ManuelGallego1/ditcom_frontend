@@ -14,6 +14,8 @@ import Cookies from 'js-cookie';
 
 type AlertType = 'success' | 'error' | 'info' | 'warning';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function TableFijos() {
     const getUserRole = () => {
         const userCookie = Cookies.get('user');
@@ -33,11 +35,41 @@ export default function TableFijos() {
         prevPageUrl: null as string | null,
     });
 
-    const fetchFijos = async (url?: string) => {
+    const fetchFijos = async (baseUrl?: string) => {
         setIsLoading(true);
         setError(null);
+
+        const getCustomFetchUrl = (url?: string) => {
+            const userCookie = Cookies.get('user');
+            const user = userCookie ? JSON.parse(userCookie) : null;
+
+            const params = new URLSearchParams();
+
+            if (!user) return url || `${API_URL}/api/fijos`;
+
+            switch (user.role) {
+                case 'vendedor':
+                    params.set('vendedor_id', user.id);
+                    break;
+                case 'coordinador':
+                    params.set('coordinador_id', user.id);
+                    break;
+                case 'pyme':
+                    params.set('ventas_pyme', '1');
+                    break;
+                default:
+                    break;
+            }
+
+            const queryString = params.toString();
+            const base = url || `${API_URL}/api/fijos`;
+            return queryString ? `${base}?${queryString}` : base;
+        };
+
         try {
-            const response: FijoServiceList = await getFijos(url || '');
+            const finalUrl = getCustomFetchUrl(baseUrl);
+            const response: FijoServiceList = await getFijos(finalUrl);
+
             if (Array.isArray(response.data)) {
                 setAllFijos(response.data);
                 setFijosList(response.data);

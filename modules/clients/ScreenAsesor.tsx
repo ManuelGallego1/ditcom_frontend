@@ -30,12 +30,12 @@ export default function ScreenAsesor() {
       <h1 className="text-2xl font-bold">Dashboard Asesor</h1>
 
       <div className="flex justify-start gap-4">
-        <CardTotalFijos vendedor_id={16} />
-        <CardTotalMovil vendedor_id={16} />
+        <CardTotalFijos vendedor_id={vendedorId} />
+        <CardTotalMovil vendedor_id={vendedorId} />
       </div>
 
       <div className="p-6">
-        <GraphVentasAnio vendedor_id={16} />
+        <GraphVentasAnio vendedor_id={vendedorId} />
       </div>
     </div>
   );

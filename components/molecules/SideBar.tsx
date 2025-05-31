@@ -87,31 +87,31 @@ export default function SideBar({ sidebarOpen, setSidebarOpen, role }: SideBarPr
             label: "Inicio",
             href: role === "pyme" ? "/pyme" : "/asesor",
             roles: ["vendedor", "activador", "pyme", "coordinador"],
-            icon: CustomIcons.users,
-        },
-        {
-            label: "Ver móvil",
-            href: role === "pyme" ? "/pyme/ver-movil" : "/asesor/ver-movil",
-            roles: ["vendedor", "activador", "coordinador", "pyme"],
-            icon: CustomIcons.phone,
-        },
-        {
-            label: "Ver Fijo",
-            href: role === "pyme" ? "/pyme/ver-fijo" : "/asesor/ver-fijo",
-            roles: ["vendedor", "activador", "coordinador", "pyme"],
-            icon: CustomIcons.home,
+            icon: CustomIcons.dashboard,
         },
         {
             label: "Crear movil",
             href: "/asesor/crear-movil",
             roles: ["vendedor"],
+            icon: CustomIcons.addPhone,
+        },
+        {
+            label: "Ver móvil",
+            href: role === "pyme" ? "/pyme/movil" : "/asesor/movil",
+            roles: ["vendedor", "activador", "coordinador", "pyme"],
             icon: CustomIcons.phone,
+        },
+        {
+            label: "Ver Fijo",
+            href: role === "pyme" ? "/pyme/fijo" : "/asesor/fijo",
+            roles: ["vendedor", "activador", "coordinador", "pyme"],
+            icon: CustomIcons.home,
         },
         {
             label: "Crear fijo",
             href: "/asesor/crear-fijo",
             roles: ["vendedor"],
-            icon: CustomIcons.home,
+            icon: CustomIcons.addHome,
         }
     ];
 
